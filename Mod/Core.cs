@@ -1,4 +1,5 @@
-﻿using BubsyArchipelagoMod.Helpers;
+﻿using BubsyArchipelagoMod.Cheats;
+using BubsyArchipelagoMod.Helpers;
 using MelonLoader;
 using UnityEngine;
 
@@ -10,14 +11,12 @@ namespace BubsyArchipelagoMod
     public class Bubsy4DArchi : MelonMod
     {
         public static MelonLogger.Instance PublicLogInstance;
-        private static KeyCode temp_debug_key;
         public static bool isDebug = true;
 
         public override void OnInitializeMelon()
         {
             PublicLogInstance = LoggerInstance;
             LoggerInstance.Msg("Archipelago Mod Initialized.");
-            temp_debug_key = KeyCode.O;
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -35,9 +34,13 @@ namespace BubsyArchipelagoMod
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (Input.GetKeyDown(temp_debug_key) && isDebug)
+            if (MoveToggleCheat.Initialized)
             {
-                MoveInventory.Jump = !MoveInventory.Jump;
+                MoveToggleCheat.ReadCheatInputs();
+            }
+            else
+            {
+                MoveToggleCheat.Initialize();
             }
         }
 

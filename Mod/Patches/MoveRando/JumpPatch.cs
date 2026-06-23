@@ -1,4 +1,5 @@
 ﻿
+
 using BubsyArchipelagoMod.Helpers;
 using HarmonyLib;
 using HarmonyLib.Tools;
@@ -11,14 +12,31 @@ namespace BubsyArchipelagoMod.Patches.MoveRando;
 [HarmonyPatch(typeof(BubsyCharacterController), "TryJump")]
 public static class JumpPatch
 {
-    public static bool Prefix(bool jumpRequested)
+    private static string previous_state_message = "";
+
+    public static void Postfix(bool jumpRequested, ref CharacterState resultingState, BubsyCharacterController __instance)
     {
-        if (jumpRequested && !MoveInventory.Jump)
+        if (resultingState != null)
         {
-            Bubsy4DArchi.LogPatchMessage("Preventing jump");
-            return false;
+            //string next_state_message = resultingState.ToString();
+            //if (next_state_message != previous_state_message)
+            //{
+            //    Bubsy4DArchi.LogPatchMessage(resultingState.ToString());
+            //    previous_state_message = next_state_message;
+            //}
+            if (resultingState == __instance.State_SkidJump && !MoveInventory.SkidJump)
+            {
+                Bubsy4DArchi.LogPatchMessage("Trying to prevent SkidJump");
+                if (MoveInventory.Jump)
+                {
+                    resultingState = __instance.State_Jump1;
+                }
+                else
+                {
+                    resultingState = __instance.State_Idle;
+                }
+            }
         }
-        return true;
-        // TODO
     }
+    
 }

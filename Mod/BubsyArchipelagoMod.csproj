@@ -438,11 +438,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="Cheats\MoveToggleCheat.cs" />
 		<Compile Include="Core.cs" />
 		<Compile Include="Helpers\MoveInventory.cs" />
 		<Compile Include="Helpers\ObjectInventory.cs" />
 		<Compile Include="Helpers\SlotSettings.cs" />
+		<Compile Include="Patches\MoveRando\HairballBouncePatch.cs" />
+		<Compile Include="Patches\MoveRando\HairballFormPatch.cs" />
 		<Compile Include="Patches\MoveRando\JumpPatch.cs" />
+		<Compile Include="Patches\MoveRando\SkidPatch.cs" />
+		<Compile Include="Patches\MoveRando\StandardActionsPatch.cs" />
 		<Compile Include="Patches\Shop\ShopInventory.cs" />
 		<Compile Include="Server\LocationData.cs" />
 		<Content Include="Directory.Build.props" />
