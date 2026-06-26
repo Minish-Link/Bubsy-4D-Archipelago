@@ -1,9 +1,10 @@
 ﻿using BubsyArchipelagoMod.Server;
+using Il2CppFabraz;
 
 namespace BubsyArchipelagoMod.Helpers;
 public static class ShopInventory
 {
-    struct ShopItemData
+    public struct ShopItemData
     {
         public int YarnCost { get; private set; }
         public int BlueprintCost { get; private set; }
@@ -24,5 +25,13 @@ public static class ShopInventory
             // TODO Refuse if Bubsy does not have enough yarn.
             return false;
         }
+    }
+
+    public static ItemData GetItemData(ShopItemData apData)
+    {
+        ItemData newData = new ItemData();
+        newData.nameContent = apData.ShopLocation.ItemName;
+
+        return newData;
     }
 }

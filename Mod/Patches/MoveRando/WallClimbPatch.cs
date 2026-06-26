@@ -6,7 +6,7 @@ using Il2CppFabraz.PlayerCharacter.Bubsy;
 
 namespace BubsyArchipelagoMod.Patches.MoveRando;
 
-[HarmonyPatch(typeof(BubsyCharacterController), "CanAttachToWall")]
+[HarmonyPatch(typeof(BaseCharacterController), "CanAttachToWall")]
 public static class WallAttachPatch
 {
     public static bool Prefix()
@@ -29,11 +29,11 @@ public static class WallClimbPatch
 [HarmonyPatch(typeof(BaseCharacterController), "TryWallCling")]
 public static class WallClingPatch
 {
-    public static bool Postfix()
+    public static bool Prefix()
     {
-        return true;
-        //Bubsy4DArchi.LogPatchMessage("Trying to cling to wall", LogType.MOVE_RANDO);
-        //return false;
+        //return true;
+        Bubsy4DArchi.LogPatchMessage("Trying to cling to wall", LogType.MOVE_RANDO);
+        return MoveInventory.WallCling;
     }
 }
 

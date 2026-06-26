@@ -3,6 +3,7 @@ using BubsyArchipelagoMod.Helpers;
 using MelonLoader;
 using UnityEngine;
 using Newtonsoft.Json;
+using Il2CppFabraz.SaveData;
 
 [assembly: MelonInfo(typeof(BubsyArchipelagoMod.Bubsy4DArchi), "Bubsy 4D Archipelago Mod", "1.0.0", "Minish", null)]
 [assembly: MelonGame("Fabraz | Atari", "Bubsy 4D")]
@@ -62,9 +63,33 @@ namespace BubsyArchipelagoMod
 
         private static void SaveCollectibleIDsToJson()
         {
-            PublicLogInstance.Msg(tempCollectableIDDict);
-            PublicLogInstance.Msg(jsonCollectableDataPath);
-            File.WriteAllText(jsonCollectableDataPath, JsonConvert.SerializeObject(tempCollectableIDDict));
+            LogPatchMessage(SaveDataManager.Instance.CurrentSaveData.totalYarnballsSpent.ToString());
+            LogPatchMessage(SaveDataManager.Instance.CurrentSaveData.totalBlueprintsSpent.ToString());
+            return;
+            //PublicLogInstance.Msg(tempCollectableIDDict);
+            //PublicLogInstance.Msg(jsonCollectableDataPath);
+            //File.WriteAllText(jsonCollectableDataPath, JsonConvert.SerializeObject(tempCollectableIDDict));
+            Dictionary<string, bool> tempStateDict = new Dictionary<string, bool>();
+            foreach(string key in SaveDataManager.Instance.CurrentSaveData.worldState.Keys)
+            {
+                bool state;
+                if (SaveDataManager.Instance.CurrentSaveData.TryGetWorldState(key, out state))
+                {
+                    tempStateDict.Add(key, state);
+                }
+            }
+            File.WriteAllText("E:\\Bubsy4DMod\\GitHub\\Bubsy-4D-Archipelago\\Data\\WorldState.json", JsonConvert.SerializeObject(tempStateDict, Formatting.Indented));
+
+            Dictionary<string, int> tempIntDict = new Dictionary<string, int>();
+            foreach(string key in SaveDataManager.Instance.CurrentSaveData.worldInts.Keys)
+            {
+                int data;
+                if (SaveDataManager.Instance.CurrentSaveData.TryGetWorldInt(key, out data))
+                {
+                    tempIntDict.Add(key, data);
+                }
+            }
+            File.WriteAllText("E:\\Bubsy4DMod\\GitHub\\Bubsy-4D-Archipelago\\Data\\WorldInts.json", JsonConvert.SerializeObject(tempIntDict, Formatting.Indented));
         }
 
         public static void LogPatchMessage(string message, LogType logType = LogType.DEFAULT)

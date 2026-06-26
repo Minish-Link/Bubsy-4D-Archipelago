@@ -12,7 +12,7 @@ namespace BubsyArchipelagoMod.Patches.MoveRando;
 [HarmonyPatch(typeof(BubsyCharacterController), "TryJump")]
 public static class JumpPatch
 {
-    private static string previous_state_message = "";
+    //private static string previous_state_message = "";
 
     public static void Postfix(bool jumpRequested, ref CharacterState resultingState, BubsyCharacterController __instance)
     {

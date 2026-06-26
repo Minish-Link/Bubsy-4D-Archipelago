@@ -1,6 +1,6 @@
 ﻿namespace BubsyArchipelagoMod.Server;
 
-struct LocationData
+public struct LocationData
 {
     public string PlayerName { get; private set; }
     public string ItemName { get; private set; }
