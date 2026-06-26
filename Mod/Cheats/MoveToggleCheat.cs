@@ -14,6 +14,7 @@ public static class MoveToggleCheat
     private static KeyCode k_toggleHairball;
     private static KeyCode k_toggleWallCling;
     private static KeyCode k_toggleSkid;
+    private static KeyCode k_unlockEverything;
 
 
     public static void Initialize()
@@ -28,6 +29,7 @@ public static class MoveToggleCheat
         k_toggleHairball = KeyCode.Keypad5;
         k_toggleWallCling = KeyCode.Keypad6;
         k_toggleSkid = KeyCode.Keypad7;
+        k_unlockEverything = KeyCode.Keypad0;
 
         Initialized = true;
     }
@@ -48,6 +50,8 @@ public static class MoveToggleCheat
             ToggleWallCling();
         else if (Input.GetKeyDown(k_toggleSkid))
             ToggleSkid();
+        else if (Input.GetKeyDown(k_unlockEverything))
+            UnlockEverything();
     }
 
     private static void ToggleJump()
@@ -200,5 +204,21 @@ public static class MoveToggleCheat
     {
         Bubsy4DArchi.LogPatchMessage("Toggling Skid");
         MoveInventory.SkidJump = !MoveInventory.SkidJump;
+    }
+
+    private static void UnlockEverything()
+    {
+        MoveInventory.Jump = true;
+        MoveInventory.DoubleJump = true;
+        MoveInventory.TripleJump = true;
+        MoveInventory.Pounce = true;
+        MoveInventory.FlutterStep = true;
+        MoveInventory.Glide = true;
+        MoveInventory.HairballState = true;
+        MoveInventory.HairballBoost = true;
+        MoveInventory.HairballBounce = true;
+        MoveInventory.WallCling = true;
+        MoveInventory.WallClimb = true;
+        MoveInventory.SkidJump = true;
     }
 }

@@ -12,7 +12,7 @@ public static class HairballBouncePatch
     {
         if (!MoveInventory.HairballBounce)
         {
-            Bubsy4DArchi.LogPatchMessage("Trying to stop Hairball Bounce");
+            Bubsy4DArchi.LogPatchMessage("Trying to stop Hairball Bounce", LogType.MOVE_RANDO);
             return false;
         }
         return true;

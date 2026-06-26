@@ -23,7 +23,7 @@ public static class StandardActionsPatch
         string next_state_string = state.ToString().Split(' ')[0];
         if (next_state_string != previous_state_string)
         {
-            Bubsy4DArchi.LogPatchMessage($"Switching from {previous_state_string} to {next_state_string}");
+            Bubsy4DArchi.LogPatchMessage($"Switching from {previous_state_string} to {next_state_string}", LogType.MOVE_RANDO);
             previous_state_string = next_state_string;
         }
 
@@ -90,10 +90,11 @@ public static class StandardActionsPatch
 
     private static bool CancelGlide(ref CharacterState state, ref BubsyCharacterController instance)
     {
-        if (state == instance.State_Glide || state == instance.State_SprintGlide)
+        if (state == instance.State_Glide || state == instance.State_SprintGlide || state == instance.State_PounceGlideBrake)
         {
             if (!MoveInventory.Glide)
             {
+                Bubsy4DArchi.LogPatchMessage("Trying to prevent Glide");
                 state = instance.State_Idle;
                 return true;
             }
@@ -120,7 +121,7 @@ public static class StandardActionsPatch
         {
             if (!MoveInventory.SkidJump)
             {
-                Bubsy4DArchi.LogPatchMessage("Trying to prevent Skid from SAP");
+                Bubsy4DArchi.LogPatchMessage("Trying to prevent Skid from SAP", LogType.MOVE_RANDO);
                 state = instance.State_Idle;
                 return true;
             }

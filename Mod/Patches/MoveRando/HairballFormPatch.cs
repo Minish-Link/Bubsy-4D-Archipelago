@@ -12,7 +12,7 @@ public static class HairballFormPatch
     {
         if (!MoveInventory.HairballState)
         {
-            Bubsy4DArchi.LogPatchMessage("Trying to prevent Hairball Form");
+            Bubsy4DArchi.LogPatchMessage("Trying to prevent Hairball Form", LogType.MOVE_RANDO);
             return false;
         }
         return true;
@@ -26,7 +26,7 @@ public static class ForcedHairballPath
     {
         if (!MoveInventory.HairballState)
         {
-            Bubsy4DArchi.LogPatchMessage("Trying to prevent forced Hairball form");
+            Bubsy4DArchi.LogPatchMessage("Trying to prevent forced Hairball form", LogType.MOVE_RANDO);
             return false;
         }
         return true;

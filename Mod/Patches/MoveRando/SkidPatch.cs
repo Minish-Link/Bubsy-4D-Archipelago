@@ -1,4 +1,5 @@
 ﻿
+/*
 using BubsyArchipelagoMod.Helpers;
 using HarmonyLib;
 using Il2CppFabraz.PlayerCharacter;
@@ -14,9 +15,10 @@ public static class SkidPatch
     {
         if (!MoveInventory.SkidJump)
         {
-            Bubsy4DArchi.LogPatchMessage("Trying to prevent TrySkid");
+            Bubsy4DArchi.LogPatchMessage("Trying to prevent TrySkid", LogType.MOVE_RANDO);
             return false;
         }
         return true;
     }
 }
+*/

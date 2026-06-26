@@ -443,22 +443,33 @@
 		<Compile Include="Helpers\MoveInventory.cs" />
 		<Compile Include="Helpers\ObjectInventory.cs" />
 		<Compile Include="Helpers\SlotSettings.cs" />
+		<Compile Include="Helpers\ValidStateHelper.cs" />
+		<Compile Include="Patches\Collectables\CollectableSendPatch.cs" />
+		<Compile Include="Patches\Levels\LevelAvailablePatch.cs" />
+		<Compile Include="Patches\MoveRando\EnterStatePatch.cs" />
+		<Compile Include="Patches\MoveRando\ExitStatePatch.cs" />
+		<Compile Include="Patches\MoveRando\FlutterJumpPatch.cs" />
+		<Compile Include="Patches\MoveRando\GlidePatch.cs" />
+		<Compile Include="Patches\MoveRando\HairballBoostPatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballBouncePatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballFormPatch.cs" />
 		<Compile Include="Patches\MoveRando\JumpPatch.cs" />
 		<Compile Include="Patches\MoveRando\SkidPatch.cs" />
 		<Compile Include="Patches\MoveRando\StandardActionsPatch.cs" />
+		<Compile Include="Patches\MoveRando\WallClimbPatch.cs" />
 		<Compile Include="Patches\Shop\ShopInventory.cs" />
 		<Compile Include="Server\LocationData.cs" />
 		<Content Include="Directory.Build.props" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Patches\Collectibles\" />
-	  <Folder Include="Patches\Levels\" />
 	  <Folder Include="Patches\ObjectRando\" />
 	  <Folder Include="Patches\Skins\" />
 	  <Folder Include="Patches\Upgrades\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

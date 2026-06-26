@@ -26,10 +26,18 @@ public static class JumpPatch
             //}
             if (resultingState == __instance.State_SkidJump && !MoveInventory.SkidJump)
             {
-                Bubsy4DArchi.LogPatchMessage("Trying to prevent SkidJump");
-                if (MoveInventory.Jump)
+                Bubsy4DArchi.LogPatchMessage("Trying to prevent SkidJump", LogType.MOVE_RANDO);
+                resultingState = __instance.State_Jump1;
+            }
+            if (resultingState == __instance.State_Jump1 && !MoveInventory.Jump)
+            {
+                if (MoveInventory.DoubleJump)
                 {
-                    resultingState = __instance.State_Jump1;
+                    resultingState = __instance.State_Jump2;
+                }
+                else if (MoveInventory.TripleJump)
+                {
+                    resultingState = __instance.State_Jump3;
                 }
                 else
                 {

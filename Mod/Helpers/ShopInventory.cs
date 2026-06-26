@@ -1,6 +1,6 @@
 ﻿using BubsyArchipelagoMod.Server;
 
-namespace BubsyArchipelagoMod.Patches.Shop;
+namespace BubsyArchipelagoMod.Helpers;
 public static class ShopInventory
 {
     struct ShopItemData
