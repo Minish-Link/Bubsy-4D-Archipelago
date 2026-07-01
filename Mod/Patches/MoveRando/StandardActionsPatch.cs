@@ -46,6 +46,15 @@ public static class StandardActionsPatch
                 willCancel = true;
             }
         }
+        else if (state == instance.State_PounceLandingLeap)
+        {
+            if (!MoveInventory.PounceLandingLeap)
+            {
+                Bubsy4DArchi.LogPatchMessage("Trying to prevent Pounce Landing Leap");
+                state = instance.State_Jump1;
+                willCancel = true;
+            }
+        }
         else if (state == instance.State_Jump3)
         {
             if (!MoveInventory.TripleJump)

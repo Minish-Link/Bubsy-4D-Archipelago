@@ -171,14 +171,16 @@ public static class MoveToggleCheat
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             Bubsy4DArchi.LogPatchMessage("Removing all Wall Climb Items");
+            MoveInventory.LedgeClimb = false;
             MoveInventory.WallCling = false;
             MoveInventory.WallClimb = false;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            if (MoveInventory.WallCling && MoveInventory.WallClimb)
+            if (MoveInventory.LedgeClimb && MoveInventory.WallCling && MoveInventory.WallClimb)
             {
                 Bubsy4DArchi.LogPatchMessage("Removing all Wall Climb Items");
+                MoveInventory.LedgeClimb = false;
                 MoveInventory.WallCling = false;
                 MoveInventory.WallClimb = false;
             }
@@ -190,10 +192,15 @@ public static class MoveToggleCheat
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            Bubsy4DArchi.LogPatchMessage("Toggling Ledge Climb");
+            MoveInventory.LedgeClimb = !MoveInventory.LedgeClimb;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             Bubsy4DArchi.LogPatchMessage("Toggling Wall Cling");
             MoveInventory.WallCling = !MoveInventory.WallCling;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Bubsy4DArchi.LogPatchMessage("Toggling Wall Climb");
             MoveInventory.WallClimb = !MoveInventory.WallClimb;
@@ -217,6 +224,7 @@ public static class MoveToggleCheat
         MoveInventory.HairballState = true;
         MoveInventory.HairballBoost = true;
         MoveInventory.HairballBounce = true;
+        MoveInventory.LedgeClimb = true;
         MoveInventory.WallCling = true;
         MoveInventory.WallClimb = true;
         MoveInventory.SkidJump = true;
