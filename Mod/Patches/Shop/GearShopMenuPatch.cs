@@ -3,6 +3,8 @@ using HarmonyLib;
 using Il2CppFabraz;
 using Il2CppFabraz.SaveData;
 using Il2CppFabraz.UI.Atari;
+using Unity.Collections;
+using UnityEngine;
 
 namespace BubsyArchipelagoMod.Patches.Shop;
 
@@ -10,6 +12,24 @@ namespace BubsyArchipelagoMod.Patches.Shop;
 [HarmonyPatch(typeof(GearShopMenu), "PopulateEntries", [typeof(int)])]
 public static class GearShopPopulatePatch
 {
+    private static bool apInitialized = false;
+
+    public static void Prefix(ref GearShopMenu __instance)
+    {
+        if (!apInitialized)
+        {
+            Bubsy4DArchi.LogPatchMessage("Initializing Gear Shop");
+            apInitialized = true;
+            //ItemData newItemData = UnityEngine.ScriptableObject.Instantiate(__instance.upgradesData[0], __instance.transform);
+            //newItemData.currencyType = __instance.currencyTypeYarnball;
+            //newItemData.blockedInDemo = false;
+            //newItemData.descriptionContent = "D";
+            //newItemData.hiddenInNineLifesMode = false;
+            //newItemData.nameContent = "N";
+            //newItemData.price = 175;
+        }
+    }
+
     public static void Postfix(ref GearShopMenu __instance)
     {
         return;

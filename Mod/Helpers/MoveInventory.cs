@@ -352,7 +352,7 @@ namespace BubsyArchipelagoMod.Helpers
 
         #region Miscellaneous
         private static bool m_flutterStepUnlocked;
-        private static bool FlutterStep
+        public static bool FlutterStep
         {
             get => m_flutterStepUnlocked;
             set => m_flutterStepUnlocked = value;
