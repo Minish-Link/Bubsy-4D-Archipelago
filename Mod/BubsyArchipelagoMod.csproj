@@ -458,6 +458,9 @@
 		<Compile Include="Patches\MoveRando\WallClimbPatch.cs" />
 		<Compile Include="Helpers\ShopInventory.cs" />
 		<Compile Include="Patches\ObjectRando\AmpelmannPatch.cs" />
+		<Compile Include="Patches\ObjectRando\GlassPipePatch.cs" />
+		<Compile Include="Patches\ObjectRando\PouncePinPatch.cs" />
+		<Compile Include="Patches\ObjectRando\SpringPatch.cs" />
 		<Compile Include="Patches\SavePatches\WorldStatePatch.cs" />
 		<Compile Include="Patches\Shop\GearShopEntryPatch.cs" />
 		<Compile Include="Patches\Shop\GearShopMenuPatch.cs" />

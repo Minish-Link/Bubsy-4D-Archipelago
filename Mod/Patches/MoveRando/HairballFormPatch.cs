@@ -10,25 +10,15 @@ public static class HairballFormPatch
 {
     public static bool Prefix()
     {
-        if (!MoveInventory.HairballState)
-        {
-            Bubsy4DArchi.LogPatchMessage("Trying to prevent Hairball Form", LogType.MOVE_RANDO);
-            return false;
-        }
-        return true;
+        return MoveInventory.HairballState;
     }
 }
 
 [HarmonyPatch(typeof(ForceHairballState), "OnTriggerEnter")]
-public static class ForcedHairballPath
+public static class ForcedHairballPatch
 {
     public static bool Prefix()
     {
-        if (!MoveInventory.HairballState)
-        {
-            Bubsy4DArchi.LogPatchMessage("Trying to prevent forced Hairball form", LogType.MOVE_RANDO);
-            return false;
-        }
-        return true;
+        return MoveInventory.HairballState;
     }
 }

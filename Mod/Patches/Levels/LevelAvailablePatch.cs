@@ -12,14 +12,7 @@ public static class LevelBeatenPatch
 {
     public static bool Postfix(bool _result, string id)
     {
-        if (id == "Planet1_Level5")
-            return true;
-        if (id == "Planet2_Level5")
-            return true;
-        if (id == "Planet3_Level5")
-            return true;
-        if (id == "Planet3_Level2")
-            return true;
-        return _result;
+        return true;
+        //return _result;
     }
 }

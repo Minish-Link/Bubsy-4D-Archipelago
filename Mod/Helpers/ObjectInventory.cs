@@ -13,6 +13,7 @@ namespace BubsyArchipelagoMod.Helpers
         private static bool m_catToysUnlocked;
         private static bool m_tapeMeasuresUnlocked;
         private static bool m_conveyorsUnlocked;
+        private static bool m_lowGravZones;
 
         public static bool Ampelmann
         {
@@ -58,6 +59,11 @@ namespace BubsyArchipelagoMod.Helpers
         {
             get => m_conveyorsUnlocked;
             set => m_conveyorsUnlocked = value;
+        }
+        public static bool LowGravityZones
+        {
+            get => m_lowGravZones;
+            set => m_lowGravZones = value;
         }
     }
 }
