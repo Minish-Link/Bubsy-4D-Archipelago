@@ -3,10 +3,9 @@ using HarmonyLib;
 using Il2CppFabraz.PlayerCharacter;
 using Il2CppFabraz.PlayerCharacter.Bubsy;
 
-
 namespace BubsyArchipelagoMod.Patches.MoveRando;
 
-[HarmonyPatch(typeof(BaseCharacterController), "CanAttachToWall")]
+[HarmonyPatch(typeof(BaseCharacterController), nameof(BaseCharacterController.TryWallCling))]
 public static class WallAttachPatch
 {
     public static bool Prefix()
@@ -18,15 +17,11 @@ public static class WallAttachPatch
 [HarmonyPatch(typeof(BubsyCharacterController), "TryWallClimbFromWall")]
 public static class WallClimbPatch
 {
-    public static bool Prefix(BubsyCharacterController __instance)
+    public static bool Prefix()
     {
         //return true;
         //Bubsy4DArchi.LogPatchMessage("Trying to climb wall", LogType.MOVE_RANDO);
         return MoveInventory.WallClimb;
-    }
-    public static void Postfix(BubsyCharacterController __instance)
-    {
-        Bubsy4DArchi.LogPatchMessage(__instance.CurrentCharacterState.ToString());
     }
 }
 
@@ -50,16 +45,12 @@ public static class WallClingPatch
         return MoveInventory.WallCling;
     }
 }
-*/
-/*
-[HarmonyPatch(typeof(BaseCharacterController), "TryWallFreeClimb")]
+[HarmonyPatch(typeof(BaseCharacterController), nameof(BaseCharacterController.TryWallFreeClimb))]
 public static class WallFreeClimbPatch
 {
-    public static bool Prefix()
+    public static bool Postfix(bool __result)
     {
-        //return true;
-        //Bubsy4DArchi.LogPatchMessage(resultingState.ToString());
-        return MoveInventory.WallClimb;
+        return MoveInventory.WallCling && __result;
     }
 }
 */

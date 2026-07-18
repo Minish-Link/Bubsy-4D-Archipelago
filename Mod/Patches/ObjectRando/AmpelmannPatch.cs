@@ -1,0 +1,2 @@
+﻿
+namespace BubsyArchipelagoMod.Patches.ObjectRando;

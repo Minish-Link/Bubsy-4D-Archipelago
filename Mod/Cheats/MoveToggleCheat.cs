@@ -218,15 +218,18 @@ public static class MoveToggleCheat
         MoveInventory.Jump = true;
         MoveInventory.DoubleJump = true;
         MoveInventory.TripleJump = true;
+        MoveInventory.SkidJump = true;
         MoveInventory.Pounce = true;
+        MoveInventory.PounceAttack = true;
+        MoveInventory.PounceLandingLeap = true;
         MoveInventory.FlutterStep = true;
         MoveInventory.Glide = true;
         MoveInventory.HairballState = true;
         MoveInventory.HairballBoost = true;
+        MoveInventory.HairballBrake = true;
         MoveInventory.HairballBounce = true;
         MoveInventory.LedgeClimb = true;
         MoveInventory.WallCling = true;
         MoveInventory.WallClimb = true;
-        MoveInventory.SkidJump = true;
     }
 }

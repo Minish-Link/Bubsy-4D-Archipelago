@@ -447,27 +447,27 @@
 		<Compile Include="Helpers\VanillaShopHelper.cs" />
 		<Compile Include="Patches\Collectables\CollectableSendPatch.cs" />
 		<Compile Include="Patches\Levels\LevelAvailablePatch.cs" />
-		<Compile Include="Patches\MoveRando\EnterStatePatch.cs" />
-		<Compile Include="Patches\MoveRando\ExitStatePatch.cs" />
 		<Compile Include="Patches\MoveRando\FlutterJumpPatch.cs" />
 		<Compile Include="Patches\MoveRando\GlidePatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballBoostPatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballBouncePatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballFormPatch.cs" />
 		<Compile Include="Patches\MoveRando\JumpPatch.cs" />
-		<Compile Include="Patches\MoveRando\SkidPatch.cs" />
 		<Compile Include="Patches\MoveRando\StandardActionsPatch.cs" />
+		<Compile Include="Patches\MoveRando\TestPatch.cs" />
 		<Compile Include="Patches\MoveRando\WallClimbPatch.cs" />
 		<Compile Include="Helpers\ShopInventory.cs" />
+		<Compile Include="Patches\ObjectRando\AmpelmannPatch.cs" />
+		<Compile Include="Patches\SavePatches\WorldStatePatch.cs" />
 		<Compile Include="Patches\Shop\GearShopEntryPatch.cs" />
 		<Compile Include="Patches\Shop\GearShopMenuPatch.cs" />
 		<Compile Include="Patches\Shop\SpendCurrencyPatch.cs" />
 		<Compile Include="Server\LocationData.cs" />
+		<Compile Include="Server\LocationSender.cs" />
 		<Content Include="Directory.Build.props" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Patches\ObjectRando\" />
 	  <Folder Include="Patches\Skins\" />
 	  <Folder Include="Patches\Upgrades\" />
 	</ItemGroup>

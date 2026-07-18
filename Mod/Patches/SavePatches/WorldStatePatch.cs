@@ -1,0 +1,1 @@
+﻿namespace BubsyArchipelagoMod.Patches.SavePatches;

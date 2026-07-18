@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 
 namespace BubsyArchipelagoMod.Patches.Collectables;
 
-[HarmonyPatch(typeof(Yarnball), "Collect")]
+[HarmonyPatch(typeof(Collectable), "Collect")]
 public static class CollectableSendPatch
 {
-    public static void Prefix(Yarnball __instance)
+    public static void Prefix(Collectable __instance)
     {
-        Bubsy4DArchi.LogPatchMessage($"Collecting {__instance.getValue}x Yarnball with ID: {__instance.id.getID}", LogType.COLLECTABLE);
-        Bubsy4DArchi.AddCollectableToDict(Bubsy4DArchi.currentSceneName, __instance.id.getID, __instance.getValue.ToString());
+        Bubsy4DArchi.LogPatchMessage($"Collecting object with ID: {__instance.id.getID}", LogType.COLLECTABLE);
+        //Bubsy4DArchi.AddCollectableToDict(Bubsy4DArchi.currentSceneName, __instance.id.getID, __instance.getValue.ToString());
     }
 }
