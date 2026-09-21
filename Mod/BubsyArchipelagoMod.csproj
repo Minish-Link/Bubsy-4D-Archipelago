@@ -440,12 +440,18 @@
 	<ItemGroup>
 		<Compile Include="Cheats\MoveToggleCheat.cs" />
 		<Compile Include="Core.cs" />
+		<Compile Include="Data\CollectableID.cs" />
+		<Compile Include="Helpers\APTextHelper.cs" />
+		<Compile Include="Helpers\APUpdater.cs" />
+		<Compile Include="ModGUI\ConnectionGUI.cs" />
 		<Compile Include="Helpers\MoveInventory.cs" />
 		<Compile Include="Helpers\ObjectInventory.cs" />
 		<Compile Include="Helpers\SlotSettings.cs" />
 		<Compile Include="Helpers\ValidStateHelper.cs" />
 		<Compile Include="Helpers\VanillaShopHelper.cs" />
+		<Compile Include="ModGUI\ShopGUI.cs" />
 		<Compile Include="Patches\Collectables\CollectableSendPatch.cs" />
+		<Compile Include="Patches\Collectables\TrophyLocationsPatch.cs" />
 		<Compile Include="Patches\Levels\LevelAvailablePatch.cs" />
 		<Compile Include="Patches\MoveRando\FlutterJumpPatch.cs" />
 		<Compile Include="Patches\MoveRando\GlidePatch.cs" />
@@ -456,10 +462,12 @@
 		<Compile Include="Patches\MoveRando\StandardActionsPatch.cs" />
 		<Compile Include="Patches\MoveRando\TestPatch.cs" />
 		<Compile Include="Patches\MoveRando\WallClimbPatch.cs" />
-		<Compile Include="Helpers\ShopInventory.cs" />
+		<Compile Include="Helpers\ShopHelper.cs" />
 		<Compile Include="Patches\ObjectRando\AmpelmannPatch.cs" />
+		<Compile Include="Patches\ObjectRando\BubblesPatch.cs" />
+		<Compile Include="Patches\ObjectRando\FanPatch.cs" />
 		<Compile Include="Patches\ObjectRando\GlassPipePatch.cs" />
-		<Compile Include="Patches\ObjectRando\PouncePinPatch.cs" />
+		<Compile Include="Patches\ObjectRando\GravityBubblePatch.cs" />
 		<Compile Include="Patches\ObjectRando\SpringPatch.cs" />
 		<Compile Include="Patches\SavePatches\WorldStatePatch.cs" />
 		<Compile Include="Patches\Shop\GearShopEntryPatch.cs" />
@@ -476,6 +484,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Archipelago.MultiClient.Net" Version="6.7.1" />
+	  <PackageReference Include="KaitoKid.ArchipelagoUtilities.AssetDownloader" Version="3.1.15" />
+	  <PackageReference Include="KaitoKid.ArchipelagoUtilities.Net" Version="3.1.15" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
 	

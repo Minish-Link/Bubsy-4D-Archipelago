@@ -2,6 +2,9 @@
 using HarmonyLib;
 using Il2CppFabraz.Bubsy;
 using Newtonsoft.Json;
+using MelonLoader;
+using Il2CppFabraz.SaveData;
+using BubsyArchipelagoMod.Data;
 
 namespace BubsyArchipelagoMod.Patches.Collectables;
 
@@ -10,7 +13,18 @@ public static class CollectableSendPatch
 {
     public static void Prefix(Collectable __instance)
     {
-        Bubsy4DArchi.LogPatchMessage($"Collecting object with ID: {__instance.id.getID}", LogType.COLLECTABLE);
-        //Bubsy4DArchi.AddCollectableToDict(Bubsy4DArchi.currentSceneName, __instance.id.getID, __instance.getValue.ToString());
+        //MelonLogger.Msg($"Collecting object with ID: {__instance.id.getID}");
+        MelonLogger.Msg($"Sending Location with ID of {CollectableID.GetLocationID(__instance.id.getID)}");
     }
 }
+
+[HarmonyPatch(typeof(SaveData), nameof(SaveData.AdjustCurrentYarnballCount))]
+public static class TestYarnballCountPatch
+{
+    public static void Postfix(string id, int val, SaveData __instance)
+    {
+        MelonLogger.Msg($"Adjusting Yarnball Count {id}, {val}, {__instance.CurrentYarnballCount}");
+    }
+}
+
+//[HarmonyPatch(typeof)]

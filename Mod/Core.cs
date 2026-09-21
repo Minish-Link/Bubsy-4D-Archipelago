@@ -4,6 +4,7 @@ using MelonLoader;
 using UnityEngine;
 using Newtonsoft.Json;
 using Il2CppFabraz.SaveData;
+using BubsyArchipelagoMod.Data;
 
 [assembly: MelonInfo(typeof(BubsyArchipelagoMod.Bubsy4DArchi), "Bubsy 4D Archipelago Mod", "1.0.0", "Minish", null)]
 [assembly: MelonGame("Fabraz | Atari", "Bubsy 4D")]
@@ -20,6 +21,7 @@ namespace BubsyArchipelagoMod
         public override void OnInitializeMelon()
         {
             PublicLogInstance = LoggerInstance;
+            CollectableID.InitializeLocationIDs();
             LoggerInstance.Msg("Archipelago Mod Initialized.");
             saveJsonKey = KeyCode.J;
         }

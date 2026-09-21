@@ -4,16 +4,17 @@ namespace BubsyArchipelagoMod.Helpers
 {
     public class ObjectInventory
     {
-        private static bool m_ampelmannUnlocked;
-        private static bool m_pipeEntryUnlocked;
-        private static bool m_pipeCannonsUnlocked;
-        private static bool m_pinheadsUnlocked;
-        private static bool m_springsUnlocked;
-        private static bool m_fansUnlocked;
-        private static bool m_catToysUnlocked;
-        private static bool m_tapeMeasuresUnlocked;
-        private static bool m_conveyorsUnlocked;
-        private static bool m_lowGravZones;
+        private static bool m_ampelmannUnlocked = true;
+        private static bool m_pipeEntryUnlocked = true;
+        private static bool m_pipeCannonsUnlocked = true;
+        private static bool m_pinheadsUnlocked = true;
+        private static bool m_springsUnlocked = true;
+        private static bool m_fansUnlocked = true;
+        private static bool m_catToysUnlocked = true;
+        private static bool m_tapeMeasuresUnlocked = true;
+        private static bool m_conveyorsUnlocked = true;
+        private static bool m_lowGravZonesUnlocked = true;
+        private static bool m_highGravZonesUnlocked = true;
 
         public static bool Ampelmann
         {
@@ -62,8 +63,13 @@ namespace BubsyArchipelagoMod.Helpers
         }
         public static bool LowGravityZones
         {
-            get => m_lowGravZones;
-            set => m_lowGravZones = value;
+            get => m_lowGravZonesUnlocked;
+            set => m_lowGravZonesUnlocked = value;
+        }
+        public static bool HighGravityZones
+        {
+            get => m_highGravZonesUnlocked;
+            set => m_highGravZonesUnlocked = value;
         }
     }
 }

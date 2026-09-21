@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using HarmonyLib;
 using Il2CppFabraz;
 using Il2CppFabraz.UI.Atari;
@@ -28,3 +28,4 @@ public static class GearShopSelectPatch
         //return __instance.itemData.nameContent != "Bubsy 3D";
     }
 }
+*/

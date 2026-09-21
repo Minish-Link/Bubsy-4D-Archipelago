@@ -1,1 +1,4 @@
-﻿namespace BubsyArchipelagoMod.Patches.SavePatches;
+﻿
+using HarmonyLib;
+namespace BubsyArchipelagoMod.Patches.SavePatches;
+
