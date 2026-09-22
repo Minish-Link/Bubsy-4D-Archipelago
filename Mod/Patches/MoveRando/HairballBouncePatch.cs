@@ -2,6 +2,7 @@
 using BubsyArchipelagoMod.Helpers;
 using HarmonyLib;
 using Il2CppFabraz.PlayerCharacter.Bubsy;
+using MelonLoader;
 
 namespace BubsyArchipelagoMod.Patches.MoveRando;
 
@@ -12,7 +13,7 @@ public static class HairballBouncePatch
     {
         if (!MoveInventory.HairballBounce)
         {
-            Bubsy4DArchi.LogPatchMessage("Trying to stop Hairball Bounce", LogType.MOVE_RANDO);
+            MelonLogger.Msg("Trying to stop Hairball Bounce");
             return false;
         }
         return true;

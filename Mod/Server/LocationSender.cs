@@ -5,9 +5,9 @@ namespace BubsyArchipelagoMod.Server;
 
 public static class LocationSender
 {
-    private static Dictionary<int, bool> m_AllCheckedLocations;
+    private static Dictionary<int, bool> m_AllCheckedLocations = new Dictionary<int, bool>();
 
-    private static List<int> m_RecentlyCheckedLocations;
+    private static List<int> m_RecentlyCheckedLocations = new List<int>();
 
     public static void SendAllCheckedLocations()
     {

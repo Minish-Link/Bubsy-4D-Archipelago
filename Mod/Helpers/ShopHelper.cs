@@ -37,7 +37,12 @@ public static class ShopHelper
     {
         if (isInitialized)
             return;
-        
+
+        SaveDataManager.Instance.CurrentSaveData.SetWorldState("648e5905-911c-4c08-80d6-c9f40f267e83", true);
+        SaveDataManager.Instance.CurrentSaveData.SetWorldState("2ba0e9ab-7e3f-4024-a50b-865b95853af7", true);
+        SaveDataManager.Instance.CurrentSaveData.SetWorldState("8a7f9f23-cc9d-4519-b400-3d496078f909", true);
+        SaveDataManager.Instance.CurrentSaveData.SetWorldState("610c845d-1a30-41e4-9a84-1eac7d8efe4a", true);
+
         yarnCurrency = templates.currencyTypeYarnball;
         blueprintCurrency = templates.currencyTypeBlueprint;
         voidCurrency = templates.outfitsData[10].currencyType;

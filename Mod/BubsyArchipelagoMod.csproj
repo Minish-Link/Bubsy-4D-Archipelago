@@ -460,6 +460,7 @@
 		<Compile Include="Patches\MoveRando\HairballFormPatch.cs" />
 		<Compile Include="Patches\MoveRando\JumpPatch.cs" />
 		<Compile Include="Patches\MoveRando\StandardActionsPatch.cs" />
+		<Compile Include="Patches\MoveRando\TankControlsPatch.cs" />
 		<Compile Include="Patches\MoveRando\TestPatch.cs" />
 		<Compile Include="Patches\MoveRando\WallClimbPatch.cs" />
 		<Compile Include="Helpers\ShopHelper.cs" />
@@ -470,9 +471,7 @@
 		<Compile Include="Patches\ObjectRando\GravityBubblePatch.cs" />
 		<Compile Include="Patches\ObjectRando\SpringPatch.cs" />
 		<Compile Include="Patches\SavePatches\WorldStatePatch.cs" />
-		<Compile Include="Patches\Shop\GearShopEntryPatch.cs" />
 		<Compile Include="Patches\Shop\GearShopMenuPatch.cs" />
-		<Compile Include="Patches\Shop\SpendCurrencyPatch.cs" />
 		<Compile Include="Server\LocationData.cs" />
 		<Compile Include="Server\LocationSender.cs" />
 		<Content Include="Directory.Build.props" />

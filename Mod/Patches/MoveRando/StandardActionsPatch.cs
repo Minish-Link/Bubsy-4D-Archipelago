@@ -4,6 +4,7 @@ using HarmonyLib;
 using Il2CppFabraz.Interactables.Atari;
 using Il2CppFabraz.PlayerCharacter;
 using Il2CppFabraz.PlayerCharacter.Bubsy;
+using MelonLoader;
 
 namespace BubsyArchipelagoMod.Patches.MoveRando;
 [HarmonyPatch(typeof(BubsyCharacterController), "TryStandardActions")]
@@ -23,7 +24,7 @@ public static class StandardActionsPatch
         string next_state_string = state.ToString().Split(' ')[0];
         if (next_state_string != previous_state_string)
         {
-            Bubsy4DArchi.LogPatchMessage($"Switching from {previous_state_string} to {next_state_string}", LogType.MOVE_RANDO);
+            MelonLogger.Msg($"Switching from {previous_state_string} to {next_state_string}");
             previous_state_string = next_state_string;
         }
 
@@ -50,7 +51,7 @@ public static class StandardActionsPatch
         {
             if (!MoveInventory.PounceLandingLeap)
             {
-                Bubsy4DArchi.LogPatchMessage("Trying to prevent Pounce Landing Leap");
+                MelonLogger.Msg("Trying to prevent Pounce Landing Leap");
                 state = instance.State_Jump1;
                 willCancel = true;
             }
@@ -103,7 +104,7 @@ public static class StandardActionsPatch
         {
             if (!MoveInventory.Glide)
             {
-                Bubsy4DArchi.LogPatchMessage("Trying to prevent Glide");
+                MelonLogger.Msg("Trying to prevent Glide");
                 state = instance.State_Idle;
                 return true;
             }
@@ -130,7 +131,7 @@ public static class StandardActionsPatch
         {
             if (!MoveInventory.SkidJump)
             {
-                Bubsy4DArchi.LogPatchMessage("Trying to prevent Skid from SAP", LogType.MOVE_RANDO);
+                MelonLogger.Msg("Trying to prevent Skid from SAP");
                 state = instance.State_Idle;
                 return true;
             }

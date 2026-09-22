@@ -1,4 +1,5 @@
 ﻿using BubsyArchipelagoMod.Helpers;
+using MelonLoader;
 using UnityEngine;
 
 namespace BubsyArchipelagoMod.Cheats;
@@ -61,7 +62,7 @@ public static class MoveToggleCheat
             MoveInventory.Jump = false;
             MoveInventory.DoubleJump = false;
             MoveInventory.TripleJump = false;
-            Bubsy4DArchi.LogPatchMessage("Removing all Jump Items");
+            MelonLogger.Msg("Removing all Jump Items");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
@@ -70,46 +71,46 @@ public static class MoveToggleCheat
                 MoveInventory.Jump = false;
                 MoveInventory.DoubleJump = false;
                 MoveInventory.TripleJump = false;
-                Bubsy4DArchi.LogPatchMessage("Removing all Jump Items");
+                MelonLogger.Msg("Removing all Jump Items");
             }
             else
             {
                 MoveInventory.UnlockProgressiveJump();
-                Bubsy4DArchi.LogPatchMessage("Unlocking Progressive Jump");
+                MelonLogger.Msg("Unlocking Progressive Jump");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            MelonLogger.Msg("Toggling Jump1");
             MoveInventory.Jump = !MoveInventory.Jump;
-            Bubsy4DArchi.LogPatchMessage("Toggling Jump1");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            MelonLogger.Msg("Toggling Jump2");
             MoveInventory.DoubleJump = !MoveInventory.DoubleJump;
-            Bubsy4DArchi.LogPatchMessage("Toggling Jump2");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            MelonLogger.Msg("Toggling Jump3");
             MoveInventory.TripleJump = !MoveInventory.TripleJump;
-            Bubsy4DArchi.LogPatchMessage("Toggling Jump3");
         }
     }
     
     private static void TogglePounce()
     {
-        Bubsy4DArchi.LogPatchMessage("Toggling Pounce");
+        MelonLogger.Msg("Toggling Pounce");
         MoveInventory.Pounce = !MoveInventory.Pounce;
     }
 
     private static void ToggleGlide()
     {
-        Bubsy4DArchi.LogPatchMessage("Toggling Glide");
+        MelonLogger.Msg("Toggling Glide");
         MoveInventory.Glide = !MoveInventory.Glide;
     }
 
     private static void ToggleFlutter()
     {
-        Bubsy4DArchi.LogPatchMessage("Toggling Flutterstep");
+        MelonLogger.Msg("Toggling Flutterstep");
         MoveInventory.FlutterStep = !MoveInventory.FlutterStep;
     }
 
@@ -117,7 +118,7 @@ public static class MoveToggleCheat
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            Bubsy4DArchi.LogPatchMessage("Removing all Hairball Items");
+            MelonLogger.Msg("Removing all Hairball Items");
             MoveInventory.HairballState = false;
             MoveInventory.HairballBoost = false;
             MoveInventory.HairballBounce = false;
@@ -126,30 +127,30 @@ public static class MoveToggleCheat
         {
             if (MoveInventory.HairballState && MoveInventory.HairballBoost && MoveInventory.HairballBounce)
             {
-                Bubsy4DArchi.LogPatchMessage("Removing all Hairball Items");
+                MelonLogger.Msg("Removing all Hairball Items");
                 MoveInventory.HairballState = false;
                 MoveInventory.HairballBoost = false;
                 MoveInventory.HairballBounce = false;
             }
             else
             {
-                Bubsy4DArchi.LogPatchMessage("Unlocking Progressive Hairball");
+                MelonLogger.Msg("Unlocking Progressive Hairball");
                 MoveInventory.UnlockProgressiveHairball();
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Bubsy4DArchi.LogPatchMessage("Toggling Hairball State");
+            MelonLogger.Msg("Toggling Hairball State");
             MoveInventory.HairballState = !MoveInventory.HairballState;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Bubsy4DArchi.LogPatchMessage("Toggling Hairball Boost");
+            MelonLogger.Msg("Toggling Hairball Boost");
             MoveInventory.HairballBoost = !MoveInventory.HairballBoost;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Bubsy4DArchi.LogPatchMessage("Toggling Hairball Bouncer");
+            MelonLogger.Msg("Toggling Hairball Bouncer");
             MoveInventory.HairballBounce = !MoveInventory.HairballBounce;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -170,7 +171,7 @@ public static class MoveToggleCheat
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            Bubsy4DArchi.LogPatchMessage("Removing all Wall Climb Items");
+            MelonLogger.Msg("Removing all Wall Climb Items");
             MoveInventory.LedgeClimb = false;
             MoveInventory.WallCling = false;
             MoveInventory.WallClimb = false;
@@ -179,37 +180,37 @@ public static class MoveToggleCheat
         {
             if (MoveInventory.LedgeClimb && MoveInventory.WallCling && MoveInventory.WallClimb)
             {
-                Bubsy4DArchi.LogPatchMessage("Removing all Wall Climb Items");
+                MelonLogger.Msg("Removing all Wall Climb Items");
                 MoveInventory.LedgeClimb = false;
                 MoveInventory.WallCling = false;
                 MoveInventory.WallClimb = false;
             }
             else
             {
-                Bubsy4DArchi.LogPatchMessage("Unlocking Progressive Wall Climb");
+                MelonLogger.Msg("Unlocking Progressive Wall Climb");
                 MoveInventory.UnlockProgressiveWallClimb();
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Bubsy4DArchi.LogPatchMessage("Toggling Ledge Climb");
+            MelonLogger.Msg("Toggling Ledge Climb");
             MoveInventory.LedgeClimb = !MoveInventory.LedgeClimb;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Bubsy4DArchi.LogPatchMessage("Toggling Wall Cling");
+            MelonLogger.Msg("Toggling Wall Cling");
             MoveInventory.WallCling = !MoveInventory.WallCling;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Bubsy4DArchi.LogPatchMessage("Toggling Wall Climb");
+            MelonLogger.Msg("Toggling Wall Climb");
             MoveInventory.WallClimb = !MoveInventory.WallClimb;
         }
     }
 
     private static void ToggleSkid()
     {
-        Bubsy4DArchi.LogPatchMessage("Toggling Skid");
+        MelonLogger.Msg("Toggling Skid");
         MoveInventory.SkidJump = !MoveInventory.SkidJump;
     }
 

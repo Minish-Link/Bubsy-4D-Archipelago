@@ -51,32 +51,10 @@ namespace BubsyArchipelagoMod
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("5ce3d8ff-05df-415e-8780-f85c12aad031", true); // Terry and Terri Cutscene
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("143e2057-16da-4a62-9f1b-691232af8786", true); // Allows Map Access
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("1ea330b4-8a3a-486e-9d8e-309273ec6acd", true); // Opens Shop
+                    SaveDataManager.Instance.CurrentSaveData.SetWorldState("f1b9ccfb-51d8-4cd0-b29b-a433b491b663", true); // Baaptiste Defeated
+                    SaveDataManager.Instance.CurrentSaveData.SetWorldState("10a5e75b-49be-4f5d-b028-496df96df79a", true); // Oblivia Dialogue (Black Hole)
                 }
             }
         }
-
-
-        public static void LogPatchMessage(string message, LogType logType = LogType.DEFAULT)
-        {
-            if (allowedLogTypes[logType])
-            {
-                PublicLogInstance.Msg(message);
-            }
-        }
-
-        private static Dictionary<LogType, bool> allowedLogTypes = new Dictionary<LogType, bool>()
-        {
-            {LogType.DEFAULT, false },
-            {LogType.MOVE_RANDO, false },
-            {LogType.COLLECTABLE, true },
-            {LogType.LEVEL, true }
-        };
-    }
-    public enum LogType
-    {
-        DEFAULT,
-        MOVE_RANDO,
-        COLLECTABLE,
-        LEVEL
     }
 }
