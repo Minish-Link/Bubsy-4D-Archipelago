@@ -443,6 +443,8 @@
 		<Compile Include="Data\CollectableID.cs" />
 		<Compile Include="Helpers\APTextHelper.cs" />
 		<Compile Include="Helpers\APUpdater.cs" />
+		<Compile Include="Instances\BubsyInstance.cs" />
+		<Compile Include="Instances\ShopInstance.cs" />
 		<Compile Include="ModGUI\ConnectionGUI.cs" />
 		<Compile Include="Helpers\MoveInventory.cs" />
 		<Compile Include="Helpers\ObjectInventory.cs" />
@@ -453,6 +455,7 @@
 		<Compile Include="Patches\Collectables\CollectableSendPatch.cs" />
 		<Compile Include="Patches\Collectables\TrophyLocationsPatch.cs" />
 		<Compile Include="Patches\Levels\LevelAvailablePatch.cs" />
+		<Compile Include="Patches\Menus\RemoveSaveSlots.cs" />
 		<Compile Include="Patches\MoveRando\FlutterJumpPatch.cs" />
 		<Compile Include="Patches\MoveRando\GlidePatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballBoostPatch.cs" />
@@ -468,7 +471,8 @@
 		<Compile Include="Patches\ObjectRando\BubblesPatch.cs" />
 		<Compile Include="Patches\ObjectRando\FanPatch.cs" />
 		<Compile Include="Patches\ObjectRando\GlassPipePatch.cs" />
-		<Compile Include="Patches\ObjectRando\GravityBubblePatch.cs" />
+		<Compile Include="Patches\ObjectRando\GravityZonePatch.cs" />
+		<Compile Include="Patches\ObjectRando\PaintSplatPatch.cs" />
 		<Compile Include="Patches\ObjectRando\SpringPatch.cs" />
 		<Compile Include="Patches\SavePatches\WorldStatePatch.cs" />
 		<Compile Include="Patches\Shop\GearShopMenuPatch.cs" />

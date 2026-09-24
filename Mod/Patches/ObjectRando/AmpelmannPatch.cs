@@ -1,21 +1,15 @@
-﻿/*
-using BubsyArchipelagoMod.Helpers;
+﻿using BubsyArchipelagoMod.Helpers;
+using BubsyArchipelagoMod.Instances;
 using HarmonyLib;
 using Il2CppFabraz.Interactables.Atari;
 using MelonLoader;
 namespace BubsyArchipelagoMod.Patches.ObjectRando;
 
-[HarmonyPatch(typeof(AmpelmannChallenge), nameof(AmpelmannChallenge.Update))]
+[HarmonyPatch(typeof(AmpelmannChallenge), nameof(AmpelmannChallenge.TriggerChallenge))]
 public static class AmpelmannPatch
 {
-    public static void Postfix(ref AmpelmannChallenge __instance)
+    public static void Postfix(AmpelmannChallenge __instance)
     {
-        if (__instance.active && ObjectInventory.Ampelmann)
-        {
-            MelonLogger.Msg("Cancel Ampelmann");
-            __instance.CancelChallenge(true);
-        }
-        //return ObjectInventory.Ampelmann;
+        __instance.CancelChallenge();
     }
 }
-*/

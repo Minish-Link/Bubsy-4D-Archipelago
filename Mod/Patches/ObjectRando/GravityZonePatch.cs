@@ -6,18 +6,22 @@ using MelonLoader;
 namespace BubsyArchipelagoMod.Patches.ObjectRando;
 
 [HarmonyPatch(typeof(GravityAdjustZone), nameof(GravityAdjustZone.OnTriggerEnter))]
-public static class LowGravityPatch
+public static class GravityZonePatch
 {
     public static bool Prefix(GravityAdjustZone __instance)
     {
-        return false;
         if (__instance.gravityScale < 1.0)
         {
             return ObjectInventory.LowGravityZones;
         }
         else
         {
-            return ObjectInventory.HighGravityZones;
+            if (ObjectInventory.HighGravityZones)
+                __instance.gravityScale = 2.0f;
+            else
+                __instance.gravityScale = 4.0f;
+            return true;
+            //return ObjectInventory.HighGravityZones;
         }
     }
 }

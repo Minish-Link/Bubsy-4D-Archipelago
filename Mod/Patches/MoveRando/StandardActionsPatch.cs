@@ -5,6 +5,7 @@ using Il2CppFabraz.Interactables.Atari;
 using Il2CppFabraz.PlayerCharacter;
 using Il2CppFabraz.PlayerCharacter.Bubsy;
 using MelonLoader;
+using UnityEngine.Playables;
 
 namespace BubsyArchipelagoMod.Patches.MoveRando;
 [HarmonyPatch(typeof(BubsyCharacterController), "TryStandardActions")]
@@ -24,7 +25,7 @@ public static class StandardActionsPatch
         string next_state_string = state.ToString().Split(' ')[0];
         if (next_state_string != previous_state_string)
         {
-            MelonLogger.Msg($"Switching from {previous_state_string} to {next_state_string}");
+            //MelonLogger.Msg($"Switching from {previous_state_string} to {next_state_string}");
             previous_state_string = next_state_string;
         }
 
@@ -38,6 +39,7 @@ public static class StandardActionsPatch
     private static bool CancelJump(ref CharacterState state, ref BubsyCharacterController instance)
     {
         bool willCancel = false;
+        //instance.vo
 
         if (state == instance.State_SkidJump)
         {

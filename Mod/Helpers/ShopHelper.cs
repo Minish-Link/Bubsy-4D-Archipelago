@@ -1,4 +1,5 @@
-﻿using BubsyArchipelagoMod.Server;
+﻿using BubsyArchipelagoMod.Instances;
+using BubsyArchipelagoMod.Server;
 using Harmony;
 using Il2CppFabraz;
 using Il2CppFabraz.SaveData;
@@ -9,8 +10,6 @@ using MelonLoader;
 namespace BubsyArchipelagoMod.Helpers;
 public static class ShopHelper
 {
-    private static GearShopMenu currentMenu;
-    private static bool menuIsOpen = false;
     private static GearShopEntry currentEntry;
     private static bool isInitialized = false;
 
@@ -21,27 +20,10 @@ public static class ShopHelper
     public static List<ItemData> currentItemDatas = new List<ItemData>();
     public static bool overrideEntries = true;
 
-    public static void OpenMenu(ref GearShopMenu newMenu)
-    {
-        currentMenu = newMenu;
-        menuIsOpen = currentMenu != null;
-    }
-
-    public static void CloseMenu()
-    {
-        currentMenu = null;
-        menuIsOpen = false;
-    }
-
-    public static void InitializeAPItemData(ref GearShopMenu templates)
+    public static void InitializeAPItemData(GearShopMenu templates)
     {
         if (isInitialized)
             return;
-
-        SaveDataManager.Instance.CurrentSaveData.SetWorldState("648e5905-911c-4c08-80d6-c9f40f267e83", true);
-        SaveDataManager.Instance.CurrentSaveData.SetWorldState("2ba0e9ab-7e3f-4024-a50b-865b95853af7", true);
-        SaveDataManager.Instance.CurrentSaveData.SetWorldState("8a7f9f23-cc9d-4519-b400-3d496078f909", true);
-        SaveDataManager.Instance.CurrentSaveData.SetWorldState("610c845d-1a30-41e4-9a84-1eac7d8efe4a", true);
 
         yarnCurrency = templates.currencyTypeYarnball;
         blueprintCurrency = templates.currencyTypeBlueprint;
@@ -102,12 +84,12 @@ public static class ShopHelper
         if (purchased)
         {
             // TODO Connect to function that sends checks to the server.
-            int index = currentMenu.currentEntries.FindIndex((Il2CppSystem.Predicate<GearShopEntry>)currentEntry.Equals);
+            int index = ShopInstance.Instance.currentEntries.FindIndex((Il2CppSystem.Predicate<GearShopEntry>)currentEntry.Equals);
             if (index < 0)
                 return;
             MelonLogger.Msg($"Purchased Item {currentEntry.label.text}");
-            UnityEngine.Object.Destroy(currentMenu.currentEntries[index].gameObject);
-            currentMenu.currentEntries.RemoveAt(index);
+            UnityEngine.Object.Destroy(ShopInstance.Instance.currentEntries[index].gameObject);
+            ShopInstance.Instance.currentEntries.RemoveAt(index);
         }
     }
 

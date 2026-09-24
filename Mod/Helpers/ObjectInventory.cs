@@ -14,7 +14,7 @@ namespace BubsyArchipelagoMod.Helpers
         private static bool m_tapeMeasuresUnlocked = true;
         private static bool m_conveyorsUnlocked = true;
         private static bool m_lowGravZonesUnlocked = true;
-        private static bool m_highGravZonesUnlocked = true;
+        private static bool m_highGravZonesUnlocked = false;
 
         public static bool Ampelmann
         {

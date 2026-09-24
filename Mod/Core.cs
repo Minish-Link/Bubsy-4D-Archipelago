@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using Il2CppFabraz.SaveData;
 using BubsyArchipelagoMod.Data;
+using BubsyArchipelagoMod.Instances;
 
 [assembly: MelonInfo(typeof(BubsyArchipelagoMod.Bubsy4DArchi), "Bubsy 4D Archipelago Mod", "1.0.0", "Minish", null)]
 [assembly: MelonGame("Fabraz | Atari", "Bubsy 4D")]
@@ -13,14 +14,12 @@ namespace BubsyArchipelagoMod
 {
     public class Bubsy4DArchi : MelonMod
     {
-        public static MelonLogger.Instance PublicLogInstance;
         public static bool isDebug = true;
         public static string currentSceneName = "";
         private static KeyCode saveJsonKey;
 
         public override void OnInitializeMelon()
         {
-            PublicLogInstance = LoggerInstance;
             CollectableID.InitializeLocationIDs();
             LoggerInstance.Msg("Archipelago Mod Initialized.");
             saveJsonKey = KeyCode.J;
@@ -53,6 +52,11 @@ namespace BubsyArchipelagoMod
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("1ea330b4-8a3a-486e-9d8e-309273ec6acd", true); // Opens Shop
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("f1b9ccfb-51d8-4cd0-b29b-a433b491b663", true); // Baaptiste Defeated
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("10a5e75b-49be-4f5d-b028-496df96df79a", true); // Oblivia Dialogue (Black Hole)
+
+                    if (BubsyInstance.Instance)
+                    {
+                        
+                    }
                 }
             }
         }

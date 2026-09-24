@@ -47,29 +47,10 @@ public static class GearShopPopulatePatch
                 ShopHelper.overrideEntries = true;
                 return false;
             }
-            /*
-            foreach (var upgrade in __instance.upgradesData)
-            {
-                GearShopEntry newEntry = UnityEngine.Object.Instantiate(__instance.entryEquipPrefab);
-                newEntry.transform.SetParent(__instance.contentRoot);
-                newEntry.SetItemData(upgrade, __instance.currencySprites[upgrade.currencyType], true);
-                newEntry.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                __instance.currentEntries.Add(newEntry);
-            }
-            foreach (var skin in __instance.outfitsData)
-            {
-                GearShopEntry newEntry = UnityEngine.Object.Instantiate(__instance.entryEquipPrefab);
-                newEntry.transform.SetParent(__instance.contentRoot);
-                newEntry.SetItemData(skin, __instance.currencySprites[skin.currencyType], true);
-                newEntry.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                MelonLogger.Msg(newEntry.itemData.nameContent);
-                //__instance.bubsyCharacterController
-                __instance.currentEntries.Add(newEntry);
-            }
-            */
         }
         else if (category == 0)
         {
+            ShopHelper.InitializeAPItemData(__instance);
             MelonLogger.Msg(ShopHelper.currentItemDatas.Count);
             __instance.ClearEntries();
             foreach (ItemData apData in ShopHelper.currentItemDatas)
@@ -80,8 +61,6 @@ public static class GearShopPopulatePatch
                 newEntry.SetItemData(apData, __instance.currencySprites[apData.currencyType], true);
                 newEntry.label.text = apData.nameContent;
                 newEntry.description.text = apData.descriptionContent;
-
-                //newEntry.selectable.
 
                 FzButton entryButton = newEntry.GetComponent<FzButton>();
                 if (entryButton)
@@ -110,35 +89,5 @@ public static class GearShopPopulatePatch
                 __instance.currentEntries.RemoveAt(i);
             }
         }
-    }
-}
-
-[HarmonyPatch(typeof(GearShopMenu), nameof(GearShopMenu.ClearEntries))]
-public static class GearShopClearPatch
-{
-    public static bool Prefix()
-    {
-        return true;
-    }
-}
-
-[HarmonyPatch(typeof(GearShopMenu), nameof(GearShopMenu.OnEnable))]
-public static class GearShopEnablePatch
-{
-    public static void Prefix(ref GearShopMenu __instance)
-    {
-        ShopHelper.OpenMenu(ref __instance);
-        MelonLogger.Msg("Gear Shop Enable");
-        ShopHelper.InitializeAPItemData(ref __instance);
-    }
-}
-
-[HarmonyPatch(typeof(GearShopMenu), nameof(GearShopMenu.OnDisable))]
-public static class GearShopDisablePatch
-{
-    public static void Prefix()
-    {
-        ShopHelper.CloseMenu();
-        MelonLogger.Msg("Gear Shop Disable");
     }
 }
