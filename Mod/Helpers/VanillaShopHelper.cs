@@ -1,4 +1,6 @@
-﻿namespace BubsyArchipelagoMod.Helpers
+﻿using Il2CppFabraz.SaveData;
+
+namespace BubsyArchipelagoMod.Helpers
 {
     public static class VanillaShopHelper
     {
@@ -63,6 +65,32 @@
             {"Red Robe", "c80224ef-eeb6-4a9e-80e7-e115007c0688" },
             {"Undead", "61cedc0b-c196-4d79-b7d1-52fc42651d69" }
         };
+
+
+        public static bool TryUnlockUpgradeOrOutfit(string itemName)
+        {
+            string purchaseID;
+            if (!purchasedStateIDs.TryGetValue(itemName, out purchaseID))
+                return false;
+            SaveDataManager.Instance.CurrentSaveData.SetWorldState(purchaseID, true);
+            string upgradeID;
+            if (upgradeStateIDs.TryGetValue(itemName, out upgradeID))
+                SaveDataManager.Instance.CurrentSaveData.SetWorldState(upgradeID, true);
+            // TODO Change Bubsy's outfit if the item is an outfit
+            return true;
+        }
+
+        public static bool IsUpgradeOrOutfitUnlocked(string itemName)
+        {
+            if (!SaveDataManager.Instance.CurrentSaveData)
+                return false;
+            string purchaseID;
+            if (!purchasedStateIDs.TryGetValue(itemName, out purchaseID))
+                return false;
+            bool unlocked;
+            SaveDataManager.Instance.CurrentSaveData.TryGetWorldState(purchaseID, out unlocked);
+            return unlocked;
+        }
 
         private static List<string> collectedItems = [];
         public static bool HasSkinOrUpgrade(string itemName)

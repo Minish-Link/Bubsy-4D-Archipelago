@@ -71,5 +71,20 @@ namespace BubsyArchipelagoMod.Helpers
             get => m_highGravZonesUnlocked;
             set => m_highGravZonesUnlocked = value;
         }
+
+        public void LockAllItems()
+        {
+            Ampelmann = false;
+            PipeEntry = false;
+            PipeCannons = false;
+            Pinheads = false;
+            Springs = false;
+            Fans = false;
+            CatToys = false;
+            TapeMeasures = false;
+            Conveyors = false;
+            LowGravityZones = false;
+            HighGravityZones = false;
+        }
     }
 }

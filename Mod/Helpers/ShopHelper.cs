@@ -2,6 +2,7 @@
 using BubsyArchipelagoMod.Server;
 using Harmony;
 using Il2CppFabraz;
+using Il2CppFabraz.Audio;
 using Il2CppFabraz.SaveData;
 using Il2CppFabraz.TextSystem;
 using Il2CppFabraz.UI.Atari;
@@ -83,6 +84,8 @@ public static class ShopHelper
 
         if (purchased)
         {
+            //ShopInstance.Instance.vo.PlayOneOff(ShopInstance.Instance.vo.clipsDatabase["Buy Clothes"].clips[6].clip);
+            ShopInstance.Instance.vo.Play("Buy Clothes", PlaySound.PlayType.Random);
             // TODO Connect to function that sends checks to the server.
             int index = ShopInstance.Instance.currentEntries.FindIndex((Il2CppSystem.Predicate<GearShopEntry>)currentEntry.Equals);
             if (index < 0)

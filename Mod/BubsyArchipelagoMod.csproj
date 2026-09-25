@@ -482,11 +482,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Patches\Skins\" />
-	  <Folder Include="Patches\Upgrades\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="Archipelago.MultiClient.Net" Version="6.7.1" />
 	  <PackageReference Include="KaitoKid.ArchipelagoUtilities.AssetDownloader" Version="3.1.15" />
 	  <PackageReference Include="KaitoKid.ArchipelagoUtilities.Net" Version="3.1.15" />

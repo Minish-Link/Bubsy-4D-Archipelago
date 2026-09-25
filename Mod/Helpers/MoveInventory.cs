@@ -1,5 +1,8 @@
 ﻿
 
+using Il2CppFabraz.SaveData;
+using Il2CppFabraz.Settings;
+
 namespace BubsyArchipelagoMod.Helpers
 
 {
@@ -60,6 +63,15 @@ namespace BubsyArchipelagoMod.Helpers
         {
             SkidJump = true;
         }
+
+        private static void LockAllJumps()
+        {
+            Jump = false;
+            DoubleJump = false;
+            TripleJump = false;
+            SkidJump = false;
+        }
+
         #endregion
 
         #region Pounce Unlocks
@@ -104,6 +116,14 @@ namespace BubsyArchipelagoMod.Helpers
             else if (!PounceLandingLeap)
                 UnlockPounceLandingLeap();
         }
+
+        private static void LockAllPounces()
+        {
+            PounceAttack = false;
+            Pounce = false;
+            PounceLandingLeap = false;
+        }
+
         #endregion
 
         #region HairballUnlocks
@@ -159,12 +179,20 @@ namespace BubsyArchipelagoMod.Helpers
                 UnlockHairballBrake();
             else if (!HairballBounce)
                 UnlockHairballBounce();
-            else if (!UpgradeHairballBouncer)
-                UnlockUpgradeHairballBouncer();
-            else if (!UpgradeHairballAirSlam)
-                UnlockUpgradeHairballAirSlam();
-            else if (!UpgradeHairballDrift)
-                UnlockUpgradeHairballDrift();
+            else if (!VanillaShopHelper.IsUpgradeOrOutfitUnlocked("Hairball Bouncer"))
+                VanillaShopHelper.TryUnlockUpgradeOrOutfit("Hairball Bouncer");
+            else if (!VanillaShopHelper.IsUpgradeOrOutfitUnlocked("Hairball Air Slam"))
+                VanillaShopHelper.TryUnlockUpgradeOrOutfit("Hairball Air Slam");
+            else if (!VanillaShopHelper.IsUpgradeOrOutfitUnlocked("Hairball Drift"))
+                VanillaShopHelper.TryUnlockUpgradeOrOutfit("Hairball Drift");
+        }
+
+        private static void LockAllHairballs()
+        {
+            HairballState = false;
+            HairballBoost = false;
+            HairballBrake = false;
+            HairballBounce = false;
         }
         #endregion
 
@@ -219,134 +247,15 @@ namespace BubsyArchipelagoMod.Helpers
                 UnlockWallCling();
             else if (!WallClimb)
                 UnlockWallClimb();
-            else if (!UpgradeWallClaws)
-                UnlockUpgradeWallClaws();
-        }
-        #endregion
-
-        #region Upgrade Unlocks
-        // TODO Unlock the actual Upgrades
-        private static bool m_twirlJumpUpgrade;
-        private static bool m_crouchJumpUpgade;
-        private static bool m_hairballBouncerUpgade;
-        private static bool m_itemSnifferUpgrade;
-        private static bool m_wallClawsUpgrade;
-        private static bool m_10thLifeUpgrade;
-        private static bool m_ogCoyoteTimeUpgrade;
-        private static bool m_scenicPooperUpgrade;
-        private static bool m_catnapUpgrade;
-        private static bool m_zoomieUpgrade;
-        private static bool m_hairballAirSlamUpgrade;
-        private static bool m_hairballDriftUpgrade;
-
-        public static bool UpgradeTwirlJump
-        {
-            get => m_twirlJumpUpgrade;
-            set => m_twirlJumpUpgrade = value;
-        }
-        public static bool UpgradeCrouchJump
-        {
-            get => m_crouchJumpUpgade;
-            set => m_crouchJumpUpgade = value;
-        }
-        public static bool UpgradeHairballBouncer
-        {
-            get => m_hairballBouncerUpgade;
-            set => m_hairballBouncerUpgade = value;
-        }
-        public static bool UpgradeItemSniffer
-        {
-            get => m_itemSnifferUpgrade;
-            set => m_itemSnifferUpgrade = value;
-        }
-        public static bool UpgradeWallClaws
-        {
-            get => m_wallClawsUpgrade;
-            set => m_wallClawsUpgrade = value;
-        }
-        public static bool Upgrade10thLife
-        {
-            get => m_10thLifeUpgrade;
-            set => m_10thLifeUpgrade = value;
-        }
-        public static bool UpgradeCoyoteTime
-        {
-            get => m_ogCoyoteTimeUpgrade;
-            set => m_ogCoyoteTimeUpgrade = value;
-        }
-        public static bool UpgradeScenicPooper
-        {
-            get => m_scenicPooperUpgrade;
-            set => m_scenicPooperUpgrade = value;
-        }
-        public static bool UpgradeCatnap
-        {
-            get => m_catnapUpgrade;
-            set => m_catnapUpgrade = value;
-        }
-        public static bool UpgradeZoomie
-        {
-            get => m_zoomieUpgrade;
-            set => m_zoomieUpgrade = value;
-        }
-        public static bool UpgradeHairballAirSlam
-        {
-            get => m_hairballAirSlamUpgrade;
-            set => m_hairballAirSlamUpgrade = value;
-        }
-        public static bool UpgradeHairballDrift
-        {
-            get => m_hairballDriftUpgrade;
-            set => m_hairballDriftUpgrade = value;
+            else if (!VanillaShopHelper.IsUpgradeOrOutfitUnlocked("Wall Claws"))
+                VanillaShopHelper.TryUnlockUpgradeOrOutfit("Wall Claws");
         }
 
-        public static void UnlockUpgradeTwirlJump()
+        private static void LockAllWallClimbs()
         {
-            UpgradeTwirlJump = true;
-        }
-        public static void UnlockUpgradeCrouchJump()
-        {
-            UpgradeCrouchJump = true;
-        }
-        public static void UnlockUpgradeHairballBouncer()
-        {
-            UpgradeHairballBouncer = true;
-        }
-        public static void UnlockUpgradeItemSniffer()
-        {
-            UpgradeItemSniffer = true;
-        }
-        public static void UnlockUpgradeWallClaws()
-        {
-            UpgradeWallClaws = true;
-        }
-        public static void UnlockUpgrade10thLife()
-        {
-            Upgrade10thLife = true;
-        }
-        public static void UnlockUpgradeOGCoyoteTime()
-        {
-            UpgradeCoyoteTime = true;
-        }
-        public static void UnlockUpgradeScenicPooper()
-        {
-            UpgradeScenicPooper = true;
-        }
-        public static void UnlockUpgradeCatnap()
-        {
-            UpgradeCatnap = true;
-        }
-        public static void UnlockUpgradeZoomie()
-        {
-            UpgradeZoomie = true;
-        }
-        public static void UnlockUpgradeHairballAirSlam()
-        {
-            UpgradeHairballAirSlam = true;
-        }
-        public static void UnlockUpgradeHairballDrift()
-        {
-            UpgradeHairballDrift = true;
+            LedgeClimb = false;
+            WallCling = false;
+            WallClimb = false;
         }
         #endregion
 
@@ -392,6 +301,32 @@ namespace BubsyArchipelagoMod.Helpers
             get => m_tankControlsUnlocked;
             set => m_tankControlsUnlocked = value;
         }
+
+        public static void UnlockTankControls()
+        {
+            TankControls = true;
+            SaveDataManager.Instance.Settings.AdjustSetting("81b09809-6bf4-4dce-a53d-0c7348fc27c6", false, false, true);
+        }
+
+        private static void LockAllMiscellaneous()
+        {
+            FlutterStep = false;
+            Glide = false;
+            CameraFreeLook = false;
+            CameraReorient = false;
+            TankControls = false;
+            SaveDataManager.Instance.Settings.AdjustSetting("81b09809-6bf4-4dce-a53d-0c7348fc27c6", true, false, true);
+        }
+
         #endregion
+
+        public static void LockAllMoveItems()
+        {
+            LockAllJumps();
+            LockAllPounces();
+            LockAllHairballs();
+            LockAllWallClimbs();
+            LockAllMiscellaneous();
+        }
     }
 }
