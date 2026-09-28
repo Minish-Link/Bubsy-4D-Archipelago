@@ -18,6 +18,7 @@ namespace BubsyArchipelagoMod
         public static string currentSceneName = "";
         private static KeyCode saveJsonKey;
 
+
         public override void OnInitializeMelon()
         {
             CollectableID.InitializeLocationIDs();
@@ -30,6 +31,19 @@ namespace BubsyArchipelagoMod
             base.OnSceneWasLoaded(buildIndex, sceneName);
             LoggerInstance.Msg($"Scene {sceneName} was loaded.");
             currentSceneName = sceneName;
+        }
+
+        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+        {
+            base.OnSceneWasInitialized(buildIndex, sceneName);
+            if (sceneName.Length >= 6 && (sceneName.Substring(0,6) == "Planet" || sceneName.Substring(0,6) == "Tutori"))
+                ObjectDisabler.TryDisableObjects(sceneName);
+        }
+
+        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
+        {
+            base.OnSceneWasUnloaded(buildIndex, sceneName);
+            ObjectDisabler.ClearObjects();
         }
         public override void OnUpdate()
         {
@@ -52,12 +66,10 @@ namespace BubsyArchipelagoMod
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("1ea330b4-8a3a-486e-9d8e-309273ec6acd", true); // Opens Shop
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("f1b9ccfb-51d8-4cd0-b29b-a433b491b663", true); // Baaptiste Defeated
                     SaveDataManager.Instance.CurrentSaveData.SetWorldState("10a5e75b-49be-4f5d-b028-496df96df79a", true); // Oblivia Dialogue (Black Hole)
-
-                    if (BubsyInstance.Instance)
-                    {
-                        
-                    }
+                    SaveDataManager.Instance.CurrentSaveData.SetWorldState("4d59705f-b9dc-49c4-be51-f4d6734450c7", true); // Gauntlet Unlock
+                    SaveDataManager.Instance.CurrentSaveData.SetWorldState("f84886d8-d6e2-49ce-bf4f-b627156ddb1a", true); // Gauntlet Unlock Cutscene
                 }
+                BubsyInstance.SayTheLineBubsy();
             }
         }
     }

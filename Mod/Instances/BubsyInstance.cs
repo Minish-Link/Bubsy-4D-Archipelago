@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using Il2CppFabraz.PlayerCharacter.Bubsy;
 using MelonLoader;
+using Il2CppFabraz.Audio;
 
 namespace BubsyArchipelagoMod.Instances;
 
@@ -13,5 +14,12 @@ public static class BubsyInstance
     {
         MelonLogger.Msg(ConsoleColor.Green, "Bubsy has awoken");
         Instance = __instance;
+    }
+
+    public static void SayTheLineBubsy()
+    {
+        if (!Instance)
+            return;
+        Instance.vo.voPlaySound.Play("whatcouldpossiblygowrong", PlaySound.PlayType.Random);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BubsyArchipelagoMod.Helpers
 {
-    public class ObjectInventory
+    public static class ObjectInventory
     {
         private static bool m_ampelmannUnlocked = true;
         private static bool m_pipeEntryUnlocked = true;
@@ -14,7 +14,9 @@ namespace BubsyArchipelagoMod.Helpers
         private static bool m_tapeMeasuresUnlocked = true;
         private static bool m_conveyorsUnlocked = true;
         private static bool m_lowGravZonesUnlocked = true;
-        private static bool m_highGravZonesUnlocked = false;
+        private static bool m_highGravZonesUnlocked = true;
+        private static bool m_blueBubbles = true;
+        private static bool m_redBubbles = true;
 
         public static bool Ampelmann
         {
@@ -72,7 +74,19 @@ namespace BubsyArchipelagoMod.Helpers
             set => m_highGravZonesUnlocked = value;
         }
 
-        public void LockAllItems()
+        public static bool BlueBubbles
+        {
+            get => m_blueBubbles;
+            set => m_blueBubbles = value;
+        }
+
+        public static bool RedBubbles
+        {
+            get => m_redBubbles;
+            set => m_redBubbles = value;
+        }
+
+        public static void LockAllItems()
         {
             Ampelmann = false;
             PipeEntry = false;
@@ -85,6 +99,47 @@ namespace BubsyArchipelagoMod.Helpers
             Conveyors = false;
             LowGravityZones = false;
             HighGravityZones = false;
+
+        }
+
+        public static bool TryUnlockObjectByItemName(string itemName)
+        {
+            switch (itemName)
+            {
+                case "Pinheads":
+                    Pinheads = true;
+                    ObjectDisabler.TryEnablePinheads();
+                    break;
+                case "Red Bubbles":
+                    RedBubbles = true;
+                    ObjectDisabler.TryEnableRedBubbles();
+                    break;
+                case "Blue Bubbles":
+                    BlueBubbles = true;
+                    ObjectDisabler.TryEnableBlueBubbles();
+                    break;
+                case "Ampelmann":
+                    Ampelmann = true;
+                    break;
+                case "Springs":
+                    Springs = true;
+                    break;
+                case "Low Gravity Zones":
+                    LowGravityZones = true;
+                    break;
+                case "High Gravity Zones":
+                    HighGravityZones = true;
+                    break;
+                case "Pipe Access":
+                    PipeEntry = true;
+                    break;
+                case "Fans":
+                    Fans = true;
+                    break;
+                default:
+                    return false;
+            }
+            return true;
         }
     }
 }

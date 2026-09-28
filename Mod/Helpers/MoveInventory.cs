@@ -9,11 +9,11 @@ namespace BubsyArchipelagoMod.Helpers
     public class MoveInventory
     {
         #region Jump Unlocks
-        private static bool m_jumpUnlocked;
-        private static bool m_doubleJumpUnlocked;
-        private static bool m_tripleJumpUnlocked;
+        private static bool m_jumpUnlocked = true;
+        private static bool m_doubleJumpUnlocked = true;
+        private static bool m_tripleJumpUnlocked = true;
 
-        private static bool m_skidJumpUnlocked;
+        private static bool m_skidJumpUnlocked = true;
 
         public static bool Jump
         {
@@ -64,6 +64,14 @@ namespace BubsyArchipelagoMod.Helpers
             SkidJump = true;
         }
 
+        private static void UnlockAllJumps()
+        {
+            Jump = true;
+            DoubleJump = true;
+            TripleJump = true;
+            SkidJump = true;
+        }
+
         private static void LockAllJumps()
         {
             Jump = false;
@@ -75,9 +83,9 @@ namespace BubsyArchipelagoMod.Helpers
         #endregion
 
         #region Pounce Unlocks
-        private static bool m_pounceUnlocked;
-        private static bool m_pounceAttackUnlocked;
-        private static bool m_pounceLandingLeapUnlocked;
+        private static bool m_pounceUnlocked = true;
+        private static bool m_pounceAttackUnlocked = true;
+        private static bool m_pounceLandingLeapUnlocked = true;
 
         public static bool PounceAttack
         {
@@ -117,6 +125,13 @@ namespace BubsyArchipelagoMod.Helpers
                 UnlockPounceLandingLeap();
         }
 
+        private static void UnlockAllPounces()
+        {
+            PounceAttack = true;
+            Pounce = true;
+            PounceLandingLeap = true;
+        }
+
         private static void LockAllPounces()
         {
             PounceAttack = false;
@@ -127,10 +142,10 @@ namespace BubsyArchipelagoMod.Helpers
         #endregion
 
         #region HairballUnlocks
-        private static bool m_hairballStateUnlocked;
-        private static bool m_hairballBoostUnlocked;
-        private static bool m_hairballBrakeUnlocked;
-        private static bool m_hairballBounceUnlocked;
+        private static bool m_hairballStateUnlocked = true;
+        private static bool m_hairballBoostUnlocked = true;
+        private static bool m_hairballBrakeUnlocked = true;
+        private static bool m_hairballBounceUnlocked = true;
 
         public static bool HairballState
         {
@@ -187,6 +202,13 @@ namespace BubsyArchipelagoMod.Helpers
                 VanillaShopHelper.TryUnlockUpgradeOrOutfit("Hairball Drift");
         }
 
+        private static void UnlockAllHairballs()
+        {
+            HairballState = true;
+            HairballBoost = true;
+            HairballBrake = true;
+            HairballBounce = true;
+        }
         private static void LockAllHairballs()
         {
             HairballState = false;
@@ -197,10 +219,10 @@ namespace BubsyArchipelagoMod.Helpers
         #endregion
 
         #region Wall Climb Unlocks
-        private static bool m_ledgeClimbUnlocked;
-        private static bool m_wallClingUnlocked;
-        private static bool m_wallClimbUnlocked;
-        private static bool m_wallJumpUnlocked;
+        private static bool m_ledgeClimbUnlocked = true;
+        private static bool m_wallClingUnlocked = true;
+        private static bool m_wallClimbUnlocked = true;
+        private static bool m_wallJumpUnlocked = true;
 
         public static bool LedgeClimb
         {
@@ -251,6 +273,13 @@ namespace BubsyArchipelagoMod.Helpers
                 VanillaShopHelper.TryUnlockUpgradeOrOutfit("Wall Claws");
         }
 
+        private static void UnlockAllWallClimbs()
+        {
+            LedgeClimb = true;
+            WallCling = true;
+            WallClimb = true;
+        }
+
         private static void LockAllWallClimbs()
         {
             LedgeClimb = false;
@@ -260,7 +289,7 @@ namespace BubsyArchipelagoMod.Helpers
         #endregion
 
         #region Miscellaneous
-        private static bool m_flutterStepUnlocked;
+        private static bool m_flutterStepUnlocked = true;
         public static bool FlutterStep
         {
             get => m_flutterStepUnlocked;
@@ -271,7 +300,7 @@ namespace BubsyArchipelagoMod.Helpers
             FlutterStep = true;
         }
 
-        private static bool m_glideUnlocked;
+        private static bool m_glideUnlocked = true;
         public static bool Glide
         {
             get => m_glideUnlocked;
@@ -282,8 +311,8 @@ namespace BubsyArchipelagoMod.Helpers
             Glide = true;
         }
 
-        private static bool m_cameraFreeLookUnlocked;
-        private static bool m_cameraReorientUnlocked;
+        private static bool m_cameraFreeLookUnlocked = true;
+        private static bool m_cameraReorientUnlocked = true;
         public static bool CameraFreeLook
         {
             get => m_cameraFreeLookUnlocked;
@@ -295,7 +324,7 @@ namespace BubsyArchipelagoMod.Helpers
             set => m_cameraReorientUnlocked = value;
         }
 
-        private static bool m_tankControlsUnlocked;
+        private static bool m_tankControlsUnlocked = true;
         public static bool TankControls
         {
             get => m_tankControlsUnlocked;
@@ -306,6 +335,15 @@ namespace BubsyArchipelagoMod.Helpers
         {
             TankControls = true;
             SaveDataManager.Instance.Settings.AdjustSetting("81b09809-6bf4-4dce-a53d-0c7348fc27c6", false, false, true);
+        }
+
+        private static void UnlockAllMiscellaneous()
+        {
+            FlutterStep = true;
+            Glide = true;
+            CameraFreeLook = true;
+            CameraReorient = true;
+            UnlockTankControls();
         }
 
         private static void LockAllMiscellaneous()
@@ -320,6 +358,15 @@ namespace BubsyArchipelagoMod.Helpers
 
         #endregion
 
+        public static void UnlockAllMoveItems()
+        {
+            UnlockAllJumps();
+            UnlockAllPounces();
+            UnlockAllHairballs();
+            UnlockAllWallClimbs();
+            UnlockAllMiscellaneous();
+        }
+
         public static void LockAllMoveItems()
         {
             LockAllJumps();
@@ -327,6 +374,81 @@ namespace BubsyArchipelagoMod.Helpers
             LockAllHairballs();
             LockAllWallClimbs();
             LockAllMiscellaneous();
+        }
+
+        public static bool TryUnlockMoveByItemName(string itemName)
+        {
+            switch (itemName)
+            {
+                case "Progressive Jump":
+                    UnlockProgressiveJump();
+                    break;
+                case "Jump":
+                    UnlockJump1();
+                    break;
+                case "Double Jump":
+                    UnlockJump2();
+                    break;
+                case "Triple Jump":
+                    UnlockJump3();
+                    break;
+                case "SkidJump":
+                    UnlockSkidJump();
+                    break;
+                case "Progressive Pounce":
+                    UnlockProgressivePounce();
+                    break;
+                case "Pounce Attack":
+                    UnlockPounceAttack();
+                    break;
+                case "Pounce":
+                    UnlockPounce();
+                    break;
+                case "Pounce Landing Leap":
+                    UnlockPounceLandingLeap();
+                    break;
+                case "Progressive Hairball":
+                    UnlockProgressiveHairball();
+                    break;
+                case "Hairball Form":
+                    UnlockHairball();
+                    break;
+                case "Hairball Boost":
+                    UnlockHairballBoost();
+                    break;
+                case "Hairball Brake":
+                    UnlockHairballBrake();
+                    break;
+                case "Hairball Bounce":
+                    UnlockHairballBounce();
+                    break;
+                case "Flutterstep":
+                    UnlockFlutterStep();
+                    break;
+                case "Glide":
+                    UnlockGlide();
+                    break;
+                case "Progressive Wall Climb":
+                    UnlockProgressiveWallClimb();
+                    break;
+                case "Ledge Climb":
+                    UnlockLedgeClimb();
+                    break;
+                case "Wall Grab":
+                    UnlockWallCling();
+                    break;
+                case "Wall Climb":
+                    UnlockWallClimb();
+                    break;
+                case "Turn off Tank Controls":
+                    UnlockTankControls();
+                    break;
+
+                default:
+                    return false;
+            }
+
+            return true;
         }
     }
 }

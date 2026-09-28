@@ -10,6 +10,7 @@ public static class AmpelmannPatch
 {
     public static void Postfix(AmpelmannChallenge __instance)
     {
-        __instance.CancelChallenge();
+        if (!ObjectInventory.Ampelmann)
+            __instance.CancelChallenge();
     }
 }

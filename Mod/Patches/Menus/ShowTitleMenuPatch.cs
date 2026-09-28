@@ -6,7 +6,7 @@ using MelonLoader;
 namespace BubsyArchipelagoMod.Patches.Menus;
 
 [HarmonyPatch(typeof(TitleMenu), nameof(TitleMenu.ShowMenu))]
-public static class RemoveSaveSlotsPatch
+public static class ShowTitleMenuPatch
 {
     static void Postfix(TitleMenu __instance)
     {
