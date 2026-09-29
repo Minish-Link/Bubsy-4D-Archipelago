@@ -70,11 +70,9 @@ public static class ShopHelper
     public static void OnAPEntryClicked()
     {
         if (!currentEntry)
-        {
             return;
-        }
-        bool purchased = false;
 
+        bool purchased = false;
         if (currentEntry.getItemData.currencyType == yarnCurrency)
             purchased = currentEntry.getItemData.price <= SaveDataManager.Instance.CurrentSaveData.TotalYarnballCount;
         else if (currentEntry.getItemData.currencyType == blueprintCurrency)
@@ -84,20 +82,32 @@ public static class ShopHelper
 
         if (purchased)
         {
-            //ShopInstance.Instance.vo.PlayOneOff(ShopInstance.Instance.vo.clipsDatabase["Buy Clothes"].clips[6].clip);
-            ShopInstance.Instance.vo.Play("Buy Clothes", PlaySound.PlayType.Random);
-            // TODO Connect to function that sends checks to the server.
-            int index = ShopInstance.Instance.currentEntries.FindIndex((Il2CppSystem.Predicate<GearShopEntry>)currentEntry.Equals);
-            if (index < 0)
-                return;
-            MelonLogger.Msg($"Purchased Item {currentEntry.label.text}");
-            UnityEngine.Object.Destroy(ShopInstance.Instance.currentEntries[index].gameObject);
-            ShopInstance.Instance.currentEntries.RemoveAt(index);
+            if (ShopInstance.TryRemoveEntry(currentEntry))
+            {
+                ShopInstance.PlayVO();
+                MelonLogger.Msg($"Purchased Item {currentEntry.label.text}");
+                // TODO Connect to function that sends checks to the server.
+            }
         }
     }
 
     public static void OnAPEntrySelected(GearShopEntry selectedEntry)
     {
         currentEntry = selectedEntry;
+    }
+
+    public static void ReceiveYarnballs(int count = 1)
+    {
+        SaveDataManager.Instance.CurrentSaveData.CurrentYarnballCount += count;
+    }
+
+    public static void ReceiveBlueprint()
+    {
+        SaveDataManager.Instance.CurrentSaveData.CurrentBlueprintCount += 1;
+    }
+
+    public static void ReceiveVoidFleece()
+    {
+        SaveDataManager.Instance.CurrentSaveData.CurrentVoidFleeceCount += 1;
     }
 }

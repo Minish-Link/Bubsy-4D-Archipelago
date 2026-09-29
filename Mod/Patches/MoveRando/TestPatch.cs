@@ -15,6 +15,7 @@ public static class TestPatch
 {
     public static void Prefix(string id, bool state)
     {
-        MelonLogger.Msg($"{id} : {state}");
+        if (Bubsy4DArchi.isDebug)
+            MelonLogger.Msg($"{id} : {state}");
     }
 }

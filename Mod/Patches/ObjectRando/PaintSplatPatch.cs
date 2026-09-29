@@ -15,9 +15,13 @@ public static class ToxicPaintPatch
     public static void Postfix(BubsyCharacterController __instance)
     {
         MelonLogger.Msg("Splat!");
-        if (__instance.life.health.currentHealth > 0)
-        {
-            __instance.life.health.TakeDamage(1, Vector3.up);
-        }
+        BubsyInstance.WhyAreYouHittingYourself();
+        //if (__instance.life.health.currentHealth > 0)
+        //{
+        //    IDamage damage = BubsyInstance.GetIDamageComponent();
+        //    if (damage == null)
+        //        return;
+        //    __instance.life.health.TakeDamage(, Vector3.up);
+        //}
     }
 }

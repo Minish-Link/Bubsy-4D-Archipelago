@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
+using Il2CppFabraz.Audio;
 using Il2CppFabraz.UI.Atari;
 using MelonLoader;
+using static Il2CppFabraz.PlayerCharacter.BaseCharacterController;
 
 namespace BubsyArchipelagoMod.Instances;
 
@@ -9,9 +11,33 @@ public static class ShopInstance
 {
     public static GearShopMenu Instance;
 
-    static void Postfix(GearShopMenu __instance)
+    public static void Postfix(GearShopMenu __instance)
     {
         Instance = __instance;
         MelonLogger.Msg(ConsoleColor.Green, "Shop's Open");
     }
+
+    public static void PlayVO(bool localItem = true)
+    {
+        if (!Instance)
+            return;
+        if (localItem)
+            Instance.vo.Play("Buy Clothes", PlaySound.PlayType.Random);
+        else
+            Instance.vo.Play("Preview Upgrades", PlaySound.PlayType.Random);
+    }
+
+    public static bool TryRemoveEntry(GearShopEntry entry)
+    {
+        if (!Instance)
+            return false;
+        int index = Instance.currentEntries.FindIndex((Il2CppSystem.Predicate<GearShopEntry>)entry.Equals);
+        if (index < 0)
+            return false;
+        MelonLogger.Msg($"Purchased Item {entry.label.text}");
+        UnityEngine.Object.Destroy(entry);
+        Instance.currentEntries.RemoveAt(index);
+        return true;
+    }
+
 }

@@ -102,6 +102,21 @@ namespace BubsyArchipelagoMod.Helpers
 
         }
 
+        public static void UnlockAllItems()
+        {
+            Ampelmann = true;
+            PipeEntry = true;
+            PipeCannons = true;
+            Pinheads = true;
+            Springs = true;
+            Fans = true;
+            CatToys = true;
+            TapeMeasures = true;
+            Conveyors = true;
+            LowGravityZones = true;
+            HighGravityZones = true;
+        }
+
         public static bool TryUnlockObjectByItemName(string itemName)
         {
             switch (itemName)

@@ -23,7 +23,7 @@ public static class CollectableID
 
     };
 
-    private static string collectableJsonPath = "Mods/collectable_locations.json";
+    private const string collectableJsonPath = "Mods/Archipelago/collectable_locations.json";
 
     public static bool InitializeLocationIDs()
     {
