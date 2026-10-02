@@ -5,7 +5,7 @@ using Il2CppFabraz.Audio;
 using Il2CppFabraz;
 using Il2CppFabraz.Interactables;
 using Il2CppFabraz.PlayerCharacter;
-using System.Numerics;
+using Archipelago.MultiClient.Net.Packets;
 
 namespace BubsyArchipelagoMod.Instances;
 
@@ -16,18 +16,17 @@ public static class BubsyInstance
 
     public static void Postfix(BubsyCharacterController __instance)
     {
-        MelonLogger.Msg(ConsoleColor.Green, "Bubsy has awoken");
+        //MelonLogger.Msg(ConsoleColor.Green, "Bubsy has awoken");
         Instance = __instance;
     }
 
     public static void SayTheLineBubsy()
     {
-        if (!Instance)
-            return;
-        Instance.vo.voPlaySound.Play("whatcouldpossiblygowrong", PlaySound.PlayType.Random);
+        Instance?.vo.voPlaySound.Play("whatcouldpossiblygowrong", PlaySound.PlayType.Random);
+        Core.session?.Socket.SendPacket(new SayPacket() { Text = "What Could Possibly Go Wrong?" });
     }
 
-    public static void WhyAreYouHittingYourself()
+    public static void WhyAreYouHittingYourself(bool ignoreInvincibility = false)
     {
         if (!Instance)
             return;
@@ -37,10 +36,19 @@ public static class BubsyInstance
         if (damage == null || !health)
             return;
 
-        if (health.invincibilityActive || health.currentHealth <= 0)
+        if ((health.invincibilityActive && !ignoreInvincibility) || health.currentHealth <= 0)
             return;
 
         health.TakeDamage(damage, UnityEngine.Vector3.up);
-        health.TriggerInvincibility(1.0f);
+        if (!ignoreInvincibility)
+            health.TriggerInvincibility(1.0f);
+    }
+
+    public static void KillHim()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            WhyAreYouHittingYourself(true);
+        }
     }
 }

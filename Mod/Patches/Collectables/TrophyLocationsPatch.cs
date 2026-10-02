@@ -10,7 +10,7 @@ public static class TrophyLocationsPatch
 {
     public static void Postfix(string id)
     {
-        LocationSender.SendLocation($"{id}_Trophy");
+        Core.SendCollectableLocation($"{id}_Trophy");
     }
 }
 
@@ -19,6 +19,6 @@ public static class TrophyBlackholeLocationsPatch
 {
     public static void Postfix(string id)
     {
-        LocationSender.SendLocation($"{id}_Trophy_BH");
+        Core.SendCollectableLocation($"{id}_Trophy_BH");
     }
 }

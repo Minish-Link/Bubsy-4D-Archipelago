@@ -8,6 +8,12 @@ namespace BubsyArchipelagoMod.Data;
 
 public static class CollectableID
 {
+    /// <summary>
+    /// Returns an integer location ID from the given in-game ID.
+    /// if there is no corresponding ID, returns 0.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static int GetLocationID(string key)
     {
         if (!gameIDtoLocID.ContainsKey(key))

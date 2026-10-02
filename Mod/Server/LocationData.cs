@@ -33,9 +33,4 @@ public struct LocationData
     {
         return $"{ItemName} for {PlayerName}";
     }
-
-    public void SendLocation()
-    {
-        // TODO
-    }
 }

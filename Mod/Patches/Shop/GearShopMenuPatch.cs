@@ -1,4 +1,6 @@
-﻿using BubsyArchipelagoMod.Helpers;
+﻿using Archipelago.MultiClient.Net.Models;
+using BubsyArchipelagoMod.Components;
+using BubsyArchipelagoMod.Helpers;
 using HarmonyLib;
 using Il2CppFabraz;
 using Il2CppFabraz.SaveData;
@@ -53,14 +55,30 @@ public static class GearShopPopulatePatch
             ShopHelper.InitializeAPItemData(__instance);
             MelonLogger.Msg(ShopHelper.currentItemDatas.Count);
             __instance.ClearEntries();
-            foreach (ItemData apData in ShopHelper.currentItemDatas)
+            List<ItemData> itemDatas = ShopHelper.currentItemDatas;
+            for (int i = 0; i < itemDatas.Count; i++)
             {
                 GearShopEntry newEntry = UnityEngine.Object.Instantiate(__instance.entryPurchasePrefab);
                 newEntry.transform.SetParent(__instance.contentRoot);
                 newEntry.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                newEntry.SetItemData(apData, __instance.currencySprites[apData.currencyType], true);
-                newEntry.label.text = apData.nameContent;
-                newEntry.description.text = apData.descriptionContent;
+                newEntry.SetItemData(itemDatas[i], __instance.currencySprites[itemDatas[i].currencyType], true);
+                //newEntry.label.text = itemDatas[i].nameContent;
+                //newEntry.description.text = itemDatas[i].descriptionContent;
+
+                ShopEntryData newEntryData = newEntry.gameObject.AddComponent<ShopEntryData>();
+                MelonLogger.Msg(newEntryData);
+                if (Core.ScoutedItems != null && Core.ScoutedItems.TryGetValue(i+1, out ScoutedItemInfo scoutedItem))
+                {
+                    //Core.ScoutedItems.TryGetValue(i+1, out ScoutedItemInfo scoutedItem);
+                    MelonLogger.Msg(scoutedItem);
+                    newEntryData.InitializeData(scoutedItem.ItemDisplayName, scoutedItem.Player.Name, scoutedItem.ItemGame, scoutedItem.LocationId);
+                }
+                else
+                {
+                    newEntryData.InitializeData($"Undefined Item {i + 1}", "Unknown Player", "Unknown Game", i + 1);
+                }
+                newEntry.label.text = newEntryData.ItemName;
+                newEntry.description.text = $"For {newEntryData.PlayerName} ({newEntryData.GameName})";
 
                 FzButton entryButton = newEntry.GetComponent<FzButton>();
                 if (entryButton)

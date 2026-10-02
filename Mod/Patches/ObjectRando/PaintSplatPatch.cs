@@ -1,10 +1,7 @@
-﻿using BubsyArchipelagoMod.Instances;
+﻿using BubsyArchipelagoMod.Helpers;
+using BubsyArchipelagoMod.Instances;
 using HarmonyLib;
-using Il2CppFabraz.Interactables;
-using Il2CppFabraz.Interactables.Atari;
 using Il2CppFabraz.PlayerCharacter.Bubsy;
-using MelonLoader;
-using UnityEngine;
 
 namespace BubsyArchipelagoMod.Patches.ObjectRando;
 
@@ -12,16 +9,9 @@ namespace BubsyArchipelagoMod.Patches.ObjectRando;
 [HarmonyPatch(typeof(BubsyCharacterController), nameof(BubsyCharacterController.TriggerCameraPaintSplat), [typeof(int)])]
 public static class ToxicPaintPatch
 {
-    public static void Postfix(BubsyCharacterController __instance)
+    public static void Postfix()
     {
-        MelonLogger.Msg("Splat!");
-        BubsyInstance.WhyAreYouHittingYourself();
-        //if (__instance.life.health.currentHealth > 0)
-        //{
-        //    IDamage damage = BubsyInstance.GetIDamageComponent();
-        //    if (damage == null)
-        //        return;
-        //    __instance.life.health.TakeDamage(, Vector3.up);
-        //}
+        if (!ObjectInventory.NonToxicPaint)
+            BubsyInstance.WhyAreYouHittingYourself();
     }
 }

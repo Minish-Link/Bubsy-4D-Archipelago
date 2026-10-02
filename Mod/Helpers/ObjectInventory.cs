@@ -17,6 +17,7 @@ namespace BubsyArchipelagoMod.Helpers
         private static bool m_highGravZonesUnlocked = true;
         private static bool m_blueBubbles = true;
         private static bool m_redBubbles = true;
+        private static bool m_nonToxicPaint = true;
 
         public static bool Ampelmann
         {
@@ -86,6 +87,12 @@ namespace BubsyArchipelagoMod.Helpers
             set => m_redBubbles = value;
         }
 
+        public static bool NonToxicPaint
+        {
+            get => m_nonToxicPaint;
+            set => m_nonToxicPaint = value;
+        }
+
         public static void LockAllItems()
         {
             Ampelmann = false;
@@ -99,7 +106,7 @@ namespace BubsyArchipelagoMod.Helpers
             Conveyors = false;
             LowGravityZones = false;
             HighGravityZones = false;
-
+            NonToxicPaint = false;
         }
 
         public static void UnlockAllItems()
@@ -115,6 +122,7 @@ namespace BubsyArchipelagoMod.Helpers
             Conveyors = true;
             LowGravityZones = true;
             HighGravityZones = true;
+            NonToxicPaint = true;
         }
 
         public static bool TryUnlockObjectByItemName(string itemName)

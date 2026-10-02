@@ -32,7 +32,8 @@ public static class APTextColor
 
     public static Color getPlayerColor(int playerSlot)
     {
-        // TODO
-        return playerColor;
+        if (Core.session == null)
+            return playerColor;
+        return Core.session.ConnectionInfo.Slot == playerSlot ? selfColor : playerColor;
     }
 }

@@ -10,10 +10,12 @@ namespace BubsyArchipelagoMod.Instances;
 public static class ShopInstance
 {
     public static GearShopMenu Instance;
+    public static bool currencyTypesLoaded = false;
 
     public static void Postfix(GearShopMenu __instance)
     {
         Instance = __instance;
+        currencyTypesLoaded = false;
         MelonLogger.Msg(ConsoleColor.Green, "Shop's Open");
     }
 
@@ -27,13 +29,16 @@ public static class ShopInstance
             Instance.vo.Play("Preview Upgrades", PlaySound.PlayType.Random);
     }
 
-    public static bool TryRemoveEntry(GearShopEntry entry)
+    public static bool TryRemoveEntry(ref GearShopEntry entry)
     {
         if (!Instance)
             return false;
         int index = Instance.currentEntries.FindIndex((Il2CppSystem.Predicate<GearShopEntry>)entry.Equals);
         if (index < 0)
+        {
+            MelonLogger.Msg("Couldn't remove shop entry");
             return false;
+        }
         MelonLogger.Msg($"Purchased Item {entry.label.text}");
         UnityEngine.Object.Destroy(entry);
         Instance.currentEntries.RemoveAt(index);
