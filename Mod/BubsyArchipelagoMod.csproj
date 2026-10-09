@@ -449,7 +449,7 @@
 		<Compile Include="Instances\GalaxyMapInstance.cs" />
 		<Compile Include="Instances\SaveDataInstance.cs" />
 		<Compile Include="Instances\ShopInstance.cs" />
-		<Compile Include="ModGUI\ConnectionGUI.cs" />
+		<Compile Include="ModGUI\APGUI.cs" />
 		<Compile Include="Helpers\MoveInventory.cs" />
 		<Compile Include="Helpers\ObjectInventory.cs" />
 		<Compile Include="Helpers\SlotSettings.cs" />
@@ -460,7 +460,7 @@
 		<Compile Include="Patches\Levels\LevelAvailablePatch.cs" />
 		<Compile Include="Patches\Levels\LevelDisplayNamePatch.cs" />
 		<Compile Include="Patches\Levels\UnlockAllLevelsPatch.cs" />
-		<Compile Include="Patches\Menus\ShowTitleMenuPatch.cs" />
+		<Compile Include="Patches\Menus\TitleMenuPatch.cs" />
 		<Compile Include="Patches\MoveRando\FlutterJumpPatch.cs" />
 		<Compile Include="Patches\MoveRando\GlidePatch.cs" />
 		<Compile Include="Patches\MoveRando\HairballBoostPatch.cs" />
@@ -482,7 +482,7 @@
 		<Compile Include="Patches\ObjectRando\PaintSplatPatch.cs" />
 		<Compile Include="Patches\ObjectRando\SpringPatch.cs" />
 		<Compile Include="Patches\SavePatches\WorldStatePatch.cs" />
-		<Compile Include="Patches\Shop\GearShopMenuPatch.cs" />
+		<Compile Include="Patches\Menus\GearShopMenuPatch.cs" />
 		<Compile Include="Server\LocationData.cs" />
 		<Compile Include="Server\ReceivedItemHandler.cs" />
 		<Compile Include="Server\SlotData.cs" />

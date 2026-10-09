@@ -49,7 +49,8 @@ namespace BubsyArchipelagoMod
 
             Connected = false;
             MoveInventory.UnlockAllMoveItems();
-            ObjectInventory.UnlockAllItems();
+            ObjectInventory.UnlockAllObjectItems();
+            LevelUnlockHelper.UnlockAllLevels();
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -82,30 +83,25 @@ namespace BubsyArchipelagoMod
 
             if (Connected)
             {
+                SaveDataInstance.UpdateCollectableCounts();
                 ReceivedItemHandler.HandleNextItem();
             }
 
-            if (Input.GetKeyDown(debugTestKey))
+            if (isDebug && Input.GetKeyDown(debugTestKey))
             {
-                SaveDataInstance.SetWorldState("6f376261-3fec-41d5-9245-f5d3cf589256", true); // Baarbee Cutscene
-                SaveDataInstance.SetWorldState("5ce3d8ff-05df-415e-8780-f85c12aad031", true); // Terry and Terri Cutscene
-                SaveDataInstance.SetWorldState("143e2057-16da-4a62-9f1b-691232af8786", true); // Allows Map Access
-                SaveDataInstance.SetWorldState("1ea330b4-8a3a-486e-9d8e-309273ec6acd", true); // Opens Shop
-                SaveDataInstance.SetWorldState("f1b9ccfb-51d8-4cd0-b29b-a433b491b663", true); // Baaptiste Defeated
-                SaveDataInstance.SetWorldState("10a5e75b-49be-4f5d-b028-496df96df79a", true); // Oblivia Dialogue (Black Hole)
-                SaveDataInstance.SetWorldState("4d59705f-b9dc-49c4-be51-f4d6734450c7", true); // Gauntlet Unlock
-                SaveDataInstance.SetWorldState("f84886d8-d6e2-49ce-bf4f-b627156ddb1a", true); // Gauntlet Unlock Cutscene
-                SaveDataInstance.SetWorldState("e226a1eb-c8ff-481b-b65a-ddf3a1b0c07c", true); // Virgil Interruption in 1-3
-                //BubsyInstance.SayTheLineBubsy();
-                //ShopHelper.ReceiveYarnballs(10);
-                ConnectToAP("localhost:38281", "Player1", "");
+                //
             }
         }
 
-        public static void ConnectToAP(string serverAddress, string userName, string password)
-        {
-            session = ArchipelagoSessionFactory.CreateSession(serverAddress);
+        private static bool attemptingConnection = false;
 
+        public static string[] TryConnectToAP(string serverAddress, string userName, string password)
+        {
+            if (attemptingConnection)
+                return ["Connecting..."];
+            attemptingConnection = true;
+
+            session = ArchipelagoSessionFactory.CreateSession(serverAddress);
             session.Items.ItemReceived += OnItemReceived;
 
             LoginResult result;
@@ -132,9 +128,9 @@ namespace BubsyArchipelagoMod
                     MelonLogger.Error(error);
                 }
 
-                // TODO Update Connect Menu
+                attemptingConnection = false;
 
-                return;
+                return failure.Errors;
             }
 
             // Successful Connection
@@ -142,27 +138,45 @@ namespace BubsyArchipelagoMod
             int sdResult = SlotData.LoadSlotData(loginSuccess.SlotData);
             if (sdResult != 0)
             {
-                MelonLogger.Msg(System.ConsoleColor.Red, $"This seed was generated with a{((sdResult > 0) ? "n older" : " newer") } version of the apworld.\n" +
-                    $"Download a version of the mod that's compatible with version {SlotData.apworldVersion} of the apworld and try again.");
+                attemptingConnection = false;
+                string[] errorMessages = [
+                    $"This seed was generated with a {((sdResult > 0) ? "n older" : " newer")} version of the apworld.",
+                    $"Download a version of the mod that's compatible with version {SlotData.apworldVersion} of the apworld and try again."
+                ];
+                MelonLogger.Msg(System.ConsoleColor.Red, string.Join(' ',errorMessages));
                 session.Socket.DisconnectAsync();
-                // TODO Display an error on the Connection GUI
-                return;
+                return errorMessages;
             }
-            MelonLogger.Msg("Slot Data finished Loading");
 
             MelonLogger.Msg($"{userName} Successfully connected to {serverAddress}");
             Connected = true;
+            attemptingConnection = false;
 
-            if (ConnectionGUI.Instance)
-            {
-                // TODO
-            }
-
-            SaveDataInstance.ResetCollectableCounts();
+            //SaveDataInstance.ResetCollectableCounts();
             MoveInventory.LockAllMoveItems();
-            ObjectInventory.LockAllItems();
+            ObjectInventory.LockAllObjectItems();
+            LevelUnlockHelper.LockAllLevels();
             MelonCoroutines.Start(ScoutAllLocations(session.Locations.AllLocations.ToArray()));
+            MelonCoroutines.Start(HintAllShopItems());
+            MelonLogger.Msg(session.RoomState.Seed);
+            //session.ConnectionInfo.UpdateConnectionOptions(ItemsHandlingFlags.AllItems);
+
+            return null;
+        }
+
+        public static void StartReceivingItems(bool receiving = true)
+        {
+            if (session is null)
+                return;
             session.ConnectionInfo.UpdateConnectionOptions(ItemsHandlingFlags.AllItems);
+        }
+
+        public static void ForceDisconnect()
+        {
+            Connected = false;
+            if (session is null)
+                return;
+            session.Socket.DisconnectAsync();
         }
 
         public static void OnItemReceived(ReceivedItemsHelper itemHelper)
@@ -237,6 +251,13 @@ namespace BubsyArchipelagoMod
             if (session == null)
                 return false;
             return session.Locations.AllLocationsChecked.Contains(id);
+        }
+
+        public static string GetSaveFileIdentifier()
+        {
+            if (session is null)
+                return "Null Identifier";
+            return $"{session.Players.ActivePlayer.Name}_{session.RoomState.Seed}";
         }
     }
 }

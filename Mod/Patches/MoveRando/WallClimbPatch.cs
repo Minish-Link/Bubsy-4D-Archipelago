@@ -14,7 +14,7 @@ public static class WallAttachPatch
     }
 }
 
-[HarmonyPatch(typeof(BubsyCharacterController), "TryWallClimbFromWall")]
+[HarmonyPatch(typeof(BubsyCharacterController), nameof(BubsyCharacterController.TryWallClimbFromWall))]
 public static class WallClimbPatch
 {
     public static bool Prefix()
@@ -25,7 +25,7 @@ public static class WallClimbPatch
     }
 }
 
-[HarmonyPatch(typeof(BaseCharacterController), "TryLedgeClimb")]
+[HarmonyPatch(typeof(BaseCharacterController), nameof(BaseCharacterController.TryLedgeClimb))]
 public static class LedgeClimbPatch
 {
     public static bool Prefix()
@@ -34,17 +34,18 @@ public static class LedgeClimbPatch
     }
 }
 
-/*
-[HarmonyPatch(typeof(BaseCharacterController), "TryWallCling")]
+[HarmonyPatch(typeof(BaseCharacterController), nameof(BaseCharacterController.TryWallCling))]
 public static class WallClingPatch
 {
     public static bool Prefix()
     {
+        return MoveInventory.WallCling;
         //return true;
         //Bubsy4DArchi.LogPatchMessage("Trying to cling to wall", LogType.MOVE_RANDO);
-        return MoveInventory.WallCling;
+        //return MoveInventory.WallCling;
     }
 }
+/*
 [HarmonyPatch(typeof(BaseCharacterController), nameof(BaseCharacterController.TryWallFreeClimb))]
 public static class WallFreeClimbPatch
 {

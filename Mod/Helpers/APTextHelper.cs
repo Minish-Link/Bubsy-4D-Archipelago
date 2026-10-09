@@ -30,6 +30,11 @@ public static class APTextColor
         return filler;
     }
 
+    public static string getItemColorHtml(int itemFlags)
+    {
+        return ColorUtility.ToHtmlStringRGBA(getItemColor(itemFlags));
+    }
+
     public static Color getPlayerColor(int playerSlot)
     {
         if (Core.session == null)

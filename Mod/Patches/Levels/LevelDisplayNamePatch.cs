@@ -12,7 +12,8 @@ public static class LevelDisplayNamePatch
     {
         if (__instance.name != "Level Name" || newText.Length < 2 || newText[1] != '-')
             return;
-        newText = LevelUnlockHelper.GetUnavailableLevelText(newText);
+        if (!LevelUnlockHelper.IsSelectedLevelUnlocked())
+            newText = LevelUnlockHelper.GetUnavailableLevelText(newText);
         //__instance.text.text = LevelUnlockHelper.GetUnavailableLevelText(newText);
         //__instance.nextText = LevelUnlockHelper.GetUnavailableLevelText(newText);
         //__instance.isTurning = true;

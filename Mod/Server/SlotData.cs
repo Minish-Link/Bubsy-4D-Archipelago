@@ -44,10 +44,8 @@ public static class SlotData
         shopPrices.Clear();
         foreach (var entry in shopPriceData.ToArray())
         {
-            MelonLogger.Msg("Creating entry");
             var temp = entry.ToObject<Dictionary<string, int>>();
             AddShopPrice(temp["Currency"], temp["Price"]);
-            MelonLogger.Msg("Entry Added");
         }
 
     }

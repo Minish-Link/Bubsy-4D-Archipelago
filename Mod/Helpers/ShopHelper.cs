@@ -50,18 +50,23 @@ public static class ShopHelper
         isInitialized = true;
     }
 
+    public static bool CanAffordItem(CollectableType currency, int price)
+    {
+        if (currency == currencies["Yarnball"])
+            return SaveDataInstance.Yarnballs >= price;
+        if (currency == currencies["Blueprint"])
+            return SaveDataInstance.Blueprints >= price;
+        if (currency == currencies["Void Fleece"])
+            return SaveDataInstance.Blueprints >= price;
+        return false;
+    }
+
     public static void OnAPEntryClicked()
     {
         if (!currentEntry)
             return;
 
-        bool purchased = false;
-        if (currentEntry.getItemData.currencyType == currencies["Yarnball"])
-            purchased = currentEntry.getItemData.price <= SaveDataManager.Instance.CurrentSaveData.TotalYarnballCount;
-        else if (currentEntry.getItemData.currencyType == currencies["Blueprint"])
-            purchased = currentEntry.getItemData.price <= SaveDataManager.Instance.CurrentSaveData.TotalBlueprintsCount;
-        else if (currentEntry.getItemData.currencyType == currencies["Void Fleece"])
-            purchased = currentEntry.getItemData.price <= SaveDataManager.Instance.CurrentSaveData.TotalVoidFleeceCount;
+        bool purchased = CanAffordItem(currentEntry.getItemData.currencyType, currentEntry.getItemData.price);
 
         if (purchased)
         {
@@ -85,10 +90,18 @@ public static class ShopHelper
 
     public static string GetProgressionDisplayText(int itemFlags)
     {
-        if ((itemFlags & 4) != 0)
+        if ((itemFlags & 4) != 0) // Trap
             return "Probably shouldn't buy this one... Eh, what could possibly go wrong?";
-
-        return "I have no idea what this is.";
+        if ((itemFlags & 1) != 0)
+        {
+            if ((itemFlags & 2) != 0) // Progression Useful
+                return "Whatever this is, it looks really important.";
+            else
+                return "This thing looks important... whatever it is.";
+        }
+        if ((itemFlags & 1) != 0)
+            return "Not sure what this is, but I am sure someone will find a use for it.";
+        return "I have no idea what this thing is.";
     }
 
     //private static Dictionary<string, string> bubsy4DItemDescriptions = new Dictionary<string, string>

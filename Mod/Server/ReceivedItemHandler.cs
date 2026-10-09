@@ -14,8 +14,27 @@ public static class ReceivedItemHandler
     public static void QueueItem(string itemName)
     {
         MelonLogger.Msg($"Queueing {itemName}");
-        itemQueue.Enqueue(itemName);
-        //itemQueue.Append(itemName);
+        switch (itemName)
+        {
+            case "Yarnball":
+                SaveDataInstance.AddYarnballs(1);
+                break;
+            case "Silver Yarnball":
+                SaveDataInstance.AddYarnballs(10);
+                break;
+            case "Blueprint":
+                SaveDataInstance.AddBlueprint();
+                break;
+            case "Void Fleece":
+                SaveDataInstance.AddVoidFleece();
+                break;
+            case "Golden Fleece":
+                SaveDataInstance.AddGoldenFleece();
+                break;
+            default:
+                itemQueue.Enqueue(itemName);
+                break;
+        }
     }
 
     public static void HandleNextItem()
@@ -32,21 +51,6 @@ public static class ReceivedItemHandler
         {
             case "What Could Possibly Go Wrong?":
                 BubsyInstance.SayTheLineBubsy();
-                break;
-            case "Yarnball":
-                SaveDataInstance.AddYarnballs(1);
-                break;
-            case "Silver Yarnball":
-                SaveDataInstance.AddYarnballs(10);
-                break;
-            case "Blueprint":
-                SaveDataInstance.AddBlueprint();
-                break;
-            case "Golden Fleece":
-                SaveDataInstance.AddGoldenFleece();
-                break;
-            case "Void Fleece":
-                SaveDataInstance.AddVoidFleece();
                 break;
             default:
                 if (LevelUnlockHelper.TryUnlockLevelByItemName(itemName))

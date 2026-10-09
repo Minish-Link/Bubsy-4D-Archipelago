@@ -12,18 +12,20 @@ public class ShopEntryData : MonoBehaviour
     private string m_playerName;
     private string m_gameName;
     private long m_locationID;
+    private int m_progFlags;
 
     public string ItemName { get => m_itemName; }
     public string PlayerName { get => m_playerName; }
     public string GameName { get => m_gameName; }
     public long LocationID { get => m_locationID; }
-
-    public void InitializeData(string itemName, string playerName, string gameName, long id)
+    public int ItemFlags { get => m_progFlags; }
+    public void InitializeData(string itemName, string playerName, string gameName, long id, int flags)
     {
         m_itemName = itemName;
         m_playerName = playerName;
         m_gameName = gameName;
         m_locationID = id;
+        m_progFlags = flags;
     }
 
     //public void InitializeData(ScoutedItemInfo scoutedItem)

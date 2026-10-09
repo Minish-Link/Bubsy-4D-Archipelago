@@ -12,7 +12,6 @@ namespace BubsyArchipelagoMod.Helpers
         private static bool m_fansUnlocked = true;
         private static bool m_catToysUnlocked = true;
         private static bool m_tapeMeasuresUnlocked = true;
-        private static bool m_conveyorsUnlocked = true;
         private static bool m_lowGravZonesUnlocked = true;
         private static bool m_highGravZonesUnlocked = true;
         private static bool m_blueBubbles = true;
@@ -59,11 +58,6 @@ namespace BubsyArchipelagoMod.Helpers
             get => m_tapeMeasuresUnlocked;
             set => m_tapeMeasuresUnlocked = value;
         }
-        public static bool Conveyors
-        {
-            get => m_conveyorsUnlocked;
-            set => m_conveyorsUnlocked = value;
-        }
         public static bool LowGravityZones
         {
             get => m_lowGravZonesUnlocked;
@@ -93,7 +87,7 @@ namespace BubsyArchipelagoMod.Helpers
             set => m_nonToxicPaint = value;
         }
 
-        public static void LockAllItems()
+        public static void LockAllObjectItems()
         {
             Ampelmann = false;
             PipeEntry = false;
@@ -103,13 +97,12 @@ namespace BubsyArchipelagoMod.Helpers
             Fans = false;
             CatToys = false;
             TapeMeasures = false;
-            Conveyors = false;
             LowGravityZones = false;
             HighGravityZones = false;
             NonToxicPaint = false;
         }
 
-        public static void UnlockAllItems()
+        public static void UnlockAllObjectItems()
         {
             Ampelmann = true;
             PipeEntry = true;
@@ -119,7 +112,6 @@ namespace BubsyArchipelagoMod.Helpers
             Fans = true;
             CatToys = true;
             TapeMeasures = true;
-            Conveyors = true;
             LowGravityZones = true;
             HighGravityZones = true;
             NonToxicPaint = true;
@@ -129,7 +121,7 @@ namespace BubsyArchipelagoMod.Helpers
         {
             switch (itemName)
             {
-                case "Pinheads":
+                case "Pins":
                     Pinheads = true;
                     ObjectDisabler.TryEnablePinheads();
                     break;
@@ -158,6 +150,9 @@ namespace BubsyArchipelagoMod.Helpers
                     break;
                 case "Fans":
                     Fans = true;
+                    break;
+                case "Nontoxic Paint":
+                    NonToxicPaint = true;
                     break;
                 default:
                     return false;

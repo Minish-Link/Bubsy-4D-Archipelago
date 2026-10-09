@@ -40,7 +40,7 @@ public static class ShopInstance
             return false;
         }
         MelonLogger.Msg($"Purchased Item {entry.label.text}");
-        UnityEngine.Object.Destroy(entry);
+        UnityEngine.Object.Destroy(entry.gameObject);
         Instance.currentEntries.RemoveAt(index);
         return true;
     }

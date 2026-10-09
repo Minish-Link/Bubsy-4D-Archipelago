@@ -14,11 +14,8 @@ public static class SuctionTubePatch
     }
 }
 
-[HarmonyPatch(typeof(SuctionTubeEndPoint), nameof(SuctionTubeEndPoint.PrepCannon))]
-public static class CannonPatch
-{
-    public static bool Prefix()
-    {
-        return ObjectInventory.PipeCannons;
-    }
-}
+//[HarmonyPatch(typeof(SuctionTubeEndPoint),nameof(SuctionTubeEndPoint.getLaunchForce) ,MethodType.Getter)]
+//public static class CannonPatch
+//{
+//    
+//}

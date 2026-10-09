@@ -16,7 +16,10 @@ public static class LevelIsAccessablePatch
 {
     public static bool Prefix(FzButton __instance)
     {
-        MelonLogger.Msg(__instance.name);
+        if (Core.isDebug)
+            MelonLogger.Msg(__instance.name);
+        if (__instance.name != "UI Button Prompt - Play")
+            return true;
         return LevelUnlockHelper.IsSelectedLevelUnlocked();
         //return __instance.name != "UI Button Prompt - Play";
     }

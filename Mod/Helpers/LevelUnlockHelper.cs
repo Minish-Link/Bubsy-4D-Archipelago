@@ -137,12 +137,26 @@ public static class LevelUnlockHelper
 
     public static bool IsLevelUnlocked(string levelName, bool blackHoleMode = false)
     {
-        // TODO
-        return true;
+        SortedSet<string> unlocks = blackHoleMode ? unlockedBlackHoleLevels : unlockedNormalLevels;
+        return unlocks.Contains(levelName);
     }
 
     public static string GetUnavailableLevelText(string levelName)
     {
-        return $"<color=#FF0000FF>{levelName}</color>";
+        return $"<color=#FF0000FF> (Locked) {levelName}</color>";
+    }
+
+    public static void LockAllLevels()
+    {
+        unlockedNormalLevels.Clear();
+        unlockedBlackHoleLevels.Clear();
+    }
+
+    public static void UnlockAllLevels()
+    {
+        foreach (string name in itemNames)
+            unlockedNormalLevels.Add(itemNameToLevelName[name]);
+        foreach (string name in itemNamesBlackHole)
+            unlockedBlackHoleLevels.Add(itemNameToLevelName[name]);
     }
 }

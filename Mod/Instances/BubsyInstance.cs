@@ -22,6 +22,7 @@ public static class BubsyInstance
 
     public static void SayTheLineBubsy()
     {
+        return;
         Instance?.vo.voPlaySound.Play("whatcouldpossiblygowrong", PlaySound.PlayType.Random);
         Core.session?.Socket.SendPacket(new SayPacket() { Text = "What Could Possibly Go Wrong?" });
     }

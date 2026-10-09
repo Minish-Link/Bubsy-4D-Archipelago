@@ -12,7 +12,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BubsyArchipelagoMod.Patches.Shop;
+namespace BubsyArchipelagoMod.Patches.Menus;
 
 [HarmonyPatch(typeof(GearShopMenu), nameof(GearShopMenu.PopulateEntries), [typeof(int), typeof(bool)])]
 [HarmonyPatch(typeof(GearShopMenu), nameof(GearShopMenu.PopulateEntries), [typeof(int)])]
@@ -41,7 +41,7 @@ public static class GearShopPopulatePatch
                 }
                 __instance.currentEntries.Clear();
                 __instance.PopulateEntries(1, true);
-                foreach(GearShopEntry entry in tempUpgradesList)
+                foreach (GearShopEntry entry in tempUpgradesList)
                 {
                     __instance.currentEntries.Add(entry);
                 }
@@ -67,18 +67,18 @@ public static class GearShopPopulatePatch
 
                 ShopEntryData newEntryData = newEntry.gameObject.AddComponent<ShopEntryData>();
                 MelonLogger.Msg(newEntryData);
-                if (Core.ScoutedItems != null && Core.ScoutedItems.TryGetValue(i+1, out ScoutedItemInfo scoutedItem))
+                if (Core.ScoutedItems != null && Core.ScoutedItems.TryGetValue(i + 1, out ScoutedItemInfo scoutedItem))
                 {
                     //Core.ScoutedItems.TryGetValue(i+1, out ScoutedItemInfo scoutedItem);
                     MelonLogger.Msg(scoutedItem);
-                    newEntryData.InitializeData(scoutedItem.ItemDisplayName, scoutedItem.Player.Name, scoutedItem.ItemGame, scoutedItem.LocationId);
+                    newEntryData.InitializeData(scoutedItem.ItemDisplayName, scoutedItem.Player.Name, scoutedItem.ItemGame, scoutedItem.LocationId, (int)scoutedItem.Flags);
                 }
                 else
                 {
-                    newEntryData.InitializeData($"Undefined Item {i + 1}", "Unknown Player", "Unknown Game", i + 1);
+                    newEntryData.InitializeData($"Undefined Item {i + 1}", "Unknown Player", "Unknown Game", i + 1, 0);
                 }
                 newEntry.label.text = newEntryData.ItemName;
-                newEntry.description.text = $"For {newEntryData.PlayerName} ({newEntryData.GameName})";
+                newEntry.description.text = $"For {newEntryData.PlayerName} ({newEntryData.GameName}) {ShopHelper.GetProgressionDisplayText(newEntryData.ItemFlags)}";
 
                 FzButton entryButton = newEntry.GetComponent<FzButton>();
                 if (entryButton)
@@ -90,21 +90,38 @@ public static class GearShopPopulatePatch
                 __instance.currentEntries.Add(newEntry);
             }
         }
-        
+
         return false;
     }
 
     public static void Postfix(int category, GearShopMenu __instance)
     {
         if (category == 0)
-            return;
-        for (int i = __instance.currentEntries.Count - 1; i >= 0; i--)
         {
-            FzToggle throwaway;
-            if (!__instance.currentEntries[i].IsToggle(out throwaway))
+            if (Core.session == null)
+                return;
+            for (int i = __instance.currentEntries.Count - 1; i >= 0; i--)
             {
-                UnityEngine.Object.Destroy(__instance.currentEntries[i].gameObject);
-                __instance.currentEntries.RemoveAt(i);
+                ShopEntryData data = __instance.currentEntries[i].gameObject.GetComponent<ShopEntryData>();
+                if (!data)
+                    continue;
+                if (Core.WasLocationChecked(data.LocationID))
+                {
+                    UnityEngine.Object.Destroy(__instance.currentEntries[i].gameObject);
+                    __instance.currentEntries.RemoveAt(i);
+                }
+            }
+        }
+        else
+        {
+            for (int i = __instance.currentEntries.Count - 1; i >= 0; i--)
+            {
+                FzToggle throwaway;
+                if (!__instance.currentEntries[i].IsToggle(out throwaway))
+                {
+                    UnityEngine.Object.Destroy(__instance.currentEntries[i].gameObject);
+                    __instance.currentEntries.RemoveAt(i);
+                }
             }
         }
     }

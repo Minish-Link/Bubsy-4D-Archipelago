@@ -392,7 +392,7 @@ namespace BubsyArchipelagoMod.Helpers
                 case "Triple Jump":
                     UnlockJump3();
                     break;
-                case "SkidJump":
+                case "Skid Jump":
                     UnlockSkidJump();
                     break;
                 case "Progressive Pounce":
@@ -440,7 +440,7 @@ namespace BubsyArchipelagoMod.Helpers
                 case "Wall Climb":
                     UnlockWallClimb();
                     break;
-                case "Turn off Tank Controls":
+                case "Turn Off Tank Controls":
                     UnlockTankControls();
                     break;
 
