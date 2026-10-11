@@ -14,6 +14,7 @@ using BubsyArchipelagoMod.ModGUI;
 using BubsyArchipelagoMod.Server;
 using Archipelago.MultiClient.Net.Models;
 using System.Collections;
+using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 
 [assembly: MelonInfo(typeof(BubsyArchipelagoMod.Core), "Bubsy 4D Archipelago Mod", "0.1.0", "Minish", null)]
 [assembly: MelonGame("Fabraz | Atari", "Bubsy 4D")]
@@ -34,7 +35,6 @@ namespace BubsyArchipelagoMod
 
         public static string currentSceneName = "";
         private static KeyCode debugTestKey;
-        public static Il2CppSystem.Random rng;
 
         public static bool Connected;
         public static string PlayerName = "";
@@ -45,7 +45,6 @@ namespace BubsyArchipelagoMod
             CollectableID.InitializeLocationIDs();
             LoggerInstance.Msg("Archipelago Mod Initialized.");
             debugTestKey = KeyCode.J;
-            rng = new Il2CppSystem.Random();
 
             Connected = false;
             MoveInventory.UnlockAllMoveItems();
@@ -73,6 +72,7 @@ namespace BubsyArchipelagoMod
             ObjectDisabler.ClearObjects();
             
         }
+
         public override void OnUpdate()
         {
             base.OnUpdate();
@@ -85,11 +85,15 @@ namespace BubsyArchipelagoMod
             {
                 SaveDataInstance.UpdateCollectableCounts();
                 ReceivedItemHandler.HandleNextItem();
+
+                if (GoalHelper.CheckForGoal())
+                {
+                    session.SetGoalAchieved();
+                }
             }
 
             if (isDebug && Input.GetKeyDown(debugTestKey))
             {
-                //
             }
         }
 
@@ -158,9 +162,8 @@ namespace BubsyArchipelagoMod
             LevelUnlockHelper.LockAllLevels();
             MelonCoroutines.Start(ScoutAllLocations(session.Locations.AllLocations.ToArray()));
             MelonCoroutines.Start(HintAllShopItems());
-            MelonLogger.Msg(session.RoomState.Seed);
-            //session.ConnectionInfo.UpdateConnectionOptions(ItemsHandlingFlags.AllItems);
-
+            deathService = session.CreateDeathLinkService();
+            deathService.OnDeathLinkReceived += ReceiveDeathLink;
             return null;
         }
 
@@ -181,18 +184,9 @@ namespace BubsyArchipelagoMod
 
         public static void OnItemReceived(ReceivedItemsHelper itemHelper)
         {
-            //MelonLogger.Msg("We just got an item!");
             var receivedItem = itemHelper.PeekItem();
-            //MelonLogger.Msg($"{receivedItem.ItemName}, {receivedItem.ItemDisplayName}");
-            //MelonLogger.Msg($"{itemHelper.Index} items from the server so far");
-            //itemHelper.DequeueItem();
-            //return;
             if (receivedItem != null)
-            {
                 ReceivedItemHandler.QueueItem(receivedItem.ItemName);
-            }
-
-            //ReceivedItemHandler.HandleItem()
             itemHelper.DequeueItem();
         }
 
@@ -236,6 +230,28 @@ namespace BubsyArchipelagoMod
             if (session == null)
                 return;
             session.Locations.CompleteLocationChecks(apID);
+        }
+
+        private static DeathLinkService deathService;
+
+        public static void SetDeathLinkEnabled(bool enabled)
+        {
+            if (enabled)
+                deathService.EnableDeathLink();
+            else
+                deathService.DisableDeathLink();
+        }
+
+        public static void SendDeath(string deathMessage)
+        {
+            if (session is null || deathService is null || !session.ConnectionInfo.Tags.Contains("DeathLink"))
+                return;
+            deathService.SendDeathLink(new DeathLink(session.Players.ActivePlayer.Alias, deathMessage));
+        }
+
+        private static void ReceiveDeathLink(DeathLink packet)
+        {
+            
         }
 
         public static void ResendAllCheckedLocations()

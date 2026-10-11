@@ -31,9 +31,11 @@ public static class TitleMenuPatch
                 continue;
             if (Core.isDebug)
                 MelonLogger.Msg($"Destroying {saveSlot.gameObject.name}");
-            saveSlot.gameObject.SetActive(false);
+            //saveSlot.gameObject.SetActive(false);
+            GameObject.Destroy(saveSlot.gameObject);
             MelonLogger.Msg(saveSlotsRoot.position);
         }
+        __instance.currentSaveSlotIndex = 3;
 
         APGUI.Initialize(saveSlotsRoot.position);
     }
