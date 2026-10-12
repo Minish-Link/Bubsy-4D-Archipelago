@@ -444,6 +444,8 @@
 		<Compile Include="Data\CollectableID.cs" />
 		<Compile Include="Helpers\APTextHelper.cs" />
 		<Compile Include="Helpers\APUpdater.cs" />
+		<Compile Include="Helpers\DeathLink.cs" />
+		<Compile Include="Helpers\GoalHelper.cs" />
 		<Compile Include="Helpers\LevelUnlockHelper.cs" />
 		<Compile Include="Instances\BubsyInstance.cs" />
 		<Compile Include="Instances\GalaxyMapInstance.cs" />

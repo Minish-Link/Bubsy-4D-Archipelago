@@ -37,7 +37,6 @@ public static class BubsyDeathLink
             return;
 
         MelonCoroutines.Start(DeathLinkSendCooldown());
-
     }
 
     private static string GetDeathLinkMessage(DamageSourceType damageType)
